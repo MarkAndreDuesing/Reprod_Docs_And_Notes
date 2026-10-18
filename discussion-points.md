@@ -1,6 +1,6 @@
 # Discussion Points – Week 1 Papers
 
-Page numbers refer to the PDFs in this repo.
+Page numbers: Collberg & Proebsting use the printed journal pages (62–69); Heumüller et al. use PDF pages (1–32).
 
 ---
 
