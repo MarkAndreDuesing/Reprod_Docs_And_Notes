@@ -124,13 +124,24 @@ def main():
     if a.voices:
         with open(a.voices) as f:
             vlist = list(csv.DictReader(f))
-        words = [len(x.split()) for _, _, x in sents]
-        total = sum(words)
-        per = total / len(vlist)
-        assign, cum = [], 0
-        for w in words:
-            assign.append(min(int(cum / per), len(vlist) - 1))
-            cum += w
+        # Balance by expected speaking time. Voices are rate-calibrated, so text
+        # length (characters) is a good proxy. Greedy: each voice takes whole
+        # sentences until it reaches its share of what is left; the share is
+        # recomputed after every voice, so no voice ends up with a tiny snippet.
+        cost = [len(x) for _, _, x in sents]
+        assign, i = [], 0
+        for vi in range(len(vlist)):
+            left_voices = len(vlist) - vi
+            left_cost = sum(cost[i:])
+            target = left_cost / left_voices
+            got = 0
+            while i < len(sents) and (got == 0 or got + cost[i] / 2 <= target
+                                      or vi == len(vlist) - 1):
+                if len(sents) - i <= left_voices - 1 and got > 0:
+                    break  # leave at least one sentence per remaining voice
+                assign.append(vi)
+                got += cost[i]
+                i += 1
     else:
         vlist = [{"no": "1", "model": a.voice, "speaker": a.speaker,
                   "length_scale": a.voice_scale}]
@@ -151,9 +162,10 @@ def main():
                     segments.append({"voice_no": v["no"], "model": v["model"],
                                      "speaker": v.get("speaker", ""), "track": t["stem"],
                                      "start": len(pcm) / 2 / RATE, "end": None,
-                                     "first_words": " ".join(text.split()[:8])})
+                                     "first_words": " ".join(text.split()[:8]), "chars": 0})
                     cur = vi
                 v = vlist[vi]
+                segments[-1]["chars"] += len(text)
                 # per-voice calibration (voices.csv column length_scale) evens out speaking rates
                 ls = float(v.get("length_scale") or 1.0) / a.speed
                 pcm += synth(voices, v["model"], v.get("speaker", ""), text, ls, tmp)
