@@ -62,6 +62,36 @@ generate the audio from it.
    (`scripts/<track>.txt`) so the audio can be regenerated or corrected.
    Commit and push.
 
+## Script format and generator
+
+Cleaned scripts are plain text, one paragraph per line, with a header line per track:
+
+```
+### 01 | collberg-01-survey | Survey: standfirst, key insights and discussion | pp. 62–63, 69
+Track one: survey. …
+```
+
+Generate with `templates/tools/tts_generate.py`:
+
+```
+python3 templates/tools/tts_generate.py <script.txt> Vorl_N/audio --voice en_GB-alba-medium --album Vorl_N
+```
+
+## Voice test (optional, to pick voices)
+
+Spread one paper over many voices to compare them on real content:
+
+- Use all candidate voices from a `voices.csv` (`no,model,speaker,sex,accent`);
+  leave out accents you don't want (e.g. American VCTK speakers).
+- Split at **sentence boundaries only**, about equal text per voice.
+- **No spoken voice labels**; the generator writes `segments.csv` with start/end
+  timestamps per voice and track.
+- Rate on the rating sheet page (audio player, highlighted current voice,
+  bad/medium/good per voice, keys 1/2/3, export as Markdown or CSV).
+  First used in `Vorl_1/audio/voice-test/`.
+- `--voices voices.csv` switches the generator to this mode.
+- Round 2: read the next paper only with the shortlisted voices.
+
 ## Content options (choose per paper)
 
 - **Full text:** everything in the reading-guide order (default for papers you
