@@ -11,6 +11,7 @@ Vorl_N/
 ├── <paper 1>.pdf
 ├── <paper 2>.pdf
 ├── reading-guide.md          ← time plan for this week's papers (from reading-guide-template.md)
+├── audio/                    ← optional MP3s + tts-plan.md (from tts-plan-template.md)
 └── discussion/
     ├── <author>-<year>.md    ← one per paper (from paper-discussion-template.md)
     └── cross-paper.md        ← comparison (from cross-paper-template.md)
