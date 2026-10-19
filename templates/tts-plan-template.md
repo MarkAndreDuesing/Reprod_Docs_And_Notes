@@ -27,7 +27,7 @@ generate the audio from it.
 | British English voice | `en_GB-cori-high` (default), alternative `en_GB-alba-medium` | Download: `python3 -m piper.download_voices <voice>` |
 | German voice | `de_DE-thorsten-high` | For future German material |
 | Conversion | `ffmpeg` (WAV → MP3, ~64 kbit/s mono is enough for speech) | Also joins chunks and adds short pauses |
-| Speed | Piper `--length-scale` (1.0 = normal, 0.9 ≈ 10 % faster) | Pick after a test clip |
+| Speed | Per-voice calibration (`templates/tools/calibrate_voices.py` → `length_scale` column in `voices.csv`) evens out voices; `--speed` sets the overall pace in any step (e.g. 1.08) | Players can also change speed; the rating sheet has a 0.05-step slider |
 
 ## Steps
 

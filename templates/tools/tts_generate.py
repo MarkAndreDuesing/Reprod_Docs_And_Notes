@@ -11,6 +11,9 @@ Usage:
     # spread the text over a list of voices (voice test), sentence boundaries only
     tts_generate.py SCRIPT OUTDIR --voices voices.csv
 
+Speed: voices.csv may carry a per-voice `length_scale` (from calibrate_voices.py) so all
+voices speak at about the same rate; --speed then sets the overall pace in fine steps.
+
 Needs: pip install piper-tts; ffmpeg; voice models in --models (downloaded with
 `python3 -m piper.download_voices <model>`).
 Writes OUTDIR/<file stem>.mp3 per track and, with --voices, OUTDIR/segments.csv
@@ -93,9 +96,12 @@ def main():
     ap.add_argument("outdir")
     ap.add_argument("--voice", default="en_GB-alba-medium")
     ap.add_argument("--speaker", default="")
+    ap.add_argument("--voice-scale", type=float, default=1.0,
+                    help="calibration length_scale for --voice (from voices.csv)")
     ap.add_argument("--voices", help="CSV with columns no,model,speaker (voice test)")
     ap.add_argument("--models", default="/tmp/piper-voices")
-    ap.add_argument("--length-scale", type=float, default=1.0)
+    ap.add_argument("--speed", type=float, default=1.0,
+                    help="overall speed, any value, e.g. 1.08 = 8 %% faster, 0.95 = 5 %% slower")
     ap.add_argument("--album", default="")
     ap.add_argument("--bitrate", default="48k")
     a = ap.parse_args()
@@ -126,7 +132,8 @@ def main():
             assign.append(min(int(cum / per), len(vlist) - 1))
             cum += w
     else:
-        vlist = [{"no": "1", "model": a.voice, "speaker": a.speaker}]
+        vlist = [{"no": "1", "model": a.voice, "speaker": a.speaker,
+                  "length_scale": a.voice_scale}]
         assign = [0] * len(sents)
 
     segments = []
@@ -147,7 +154,9 @@ def main():
                                      "first_words": " ".join(text.split()[:8])})
                     cur = vi
                 v = vlist[vi]
-                pcm += synth(voices, v["model"], v.get("speaker", ""), text, a.length_scale, tmp)
+                # per-voice calibration (voices.csv column length_scale) evens out speaking rates
+                ls = float(v.get("length_scale") or 1.0) / a.speed
+                pcm += synth(voices, v["model"], v.get("speaker", ""), text, ls, tmp)
                 pcm += silence(PARAGRAPH_GAP if para_end else SENTENCE_GAP)
             segments[-1]["end"] = len(pcm) / 2 / RATE
             raw = Path(tmp) / "track.raw"
