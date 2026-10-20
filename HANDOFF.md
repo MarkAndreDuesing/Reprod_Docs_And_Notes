@@ -24,6 +24,8 @@ you the lecture slides and two papers.
 | `templates/reading-guide-template.md` | Three-pass method, five Cs, claim → evidence → doubt table, time plans by paper type, standard questions, discussion roles |
 | `templates/paper-discussion-template.md` | Sections for one paper's discussion file |
 | `templates/cross-paper-template.md` | Comparison table and cross-paper questions |
+| `templates/paper-notes-template.md` | Condensed bullet notes of what a paper says (incl. condensing the user's own copied snippets) |
+| `templates/moderation-template.md` | **The user moderates lecture 2.** Question sequence and the quality test for discussion questions |
 | `Vorl_1/reading-guide.md` | Filled example: per-block time plan mapped to real page ranges |
 | `Vorl_1/discussion/*.md` | Filled examples: one file per paper and `cross-paper.md` |
 | `templates/tts-plan-template.md`, `templates/tools/`, `Vorl_1/audio/` | Text-to-speech work. **Handled in a separate chat; leave it alone** (see below) |
@@ -47,7 +49,13 @@ you the lecture slides and two papers.
    - Rule: if behind schedule, cut background and related work, never method or synthesis.
    - Add paper-specific "questions to ask while reading".
 5. **Read both papers in full**, not just the abstract. Extract the text with
-   `pdftotext` and read it all.
+   `pdftotext` and read it all. Read each paper's discussion and
+   threats-to-validity sections early, so your critique goes beyond what the
+   authors already admit.
+5b. **Write condensed notes per paper** in `Vorl_N/notes/` from
+   `paper-notes-template.md`. If the user pastes their own snippets and
+   comments, condense those, keep their emphasis, and tighten their comments
+   (with a counterpoint where useful).
 6. **Write one discussion file per paper** in `Vorl_N/discussion/`
    (`<surname>[-et-al]-<year>.md`), with these sections:
    - one-sentence summary with key numbers, plus the page-number note
@@ -59,9 +67,16 @@ you the lecture slides and two papers.
 7. **Write `Vorl_N/discussion/cross-paper.md`:** a comparison table, discussion
    questions and broader opinion questions. Also link back to earlier weeks'
    papers where useful.
-8. **Check against the lecture slides.** Compare terms such as
-   repeatability, reproducibility and replicability with how the lecture
-   defines them.
+8. **Check terminology.** The seminar uses the **2020 definitions** of
+   repeatability, reproducibility and replicability; the week-1 papers used
+   the 2011 ones. Map every paper's terms to the 2020 ones and check against
+   the slides.
+8b. **Write `Vorl_N/moderation.md`** from `moderation-template.md`: the user
+   moderates the lecture-2 discussion. Questions must lead to real
+   discussion: not obvious, not "I don't know"-open, with a hook in the
+   paper and two defensible opposing answers. Include 1–2 outside-the-box
+   questions and favour "how could incentives be aligned?" over blame.
+   Add short background facts (current practice, technology basics).
 9. **Update the root `README.md`** with a line for `Vorl_N/`.
 10. **Commit and push**, then summarise the strongest points in chat.
 
@@ -78,6 +93,12 @@ you the lecture slides and two papers.
   - a correlation was described as causation (tiny Cliff's δ);
   - "weak repeatability" only means the code builds;
   - one paper is sceptical of VMs while the other recommends containers.
+- **Focus areas** (from the week-1 seminar notes, details in `templates/README.md`):
+  incentive alignment instead of blame; what guidelines or regulation could
+  follow and how they'd be circumvented; conflicting guidelines; long-term
+  archiving cost and who pays; whether citations measure impact; what changed
+  since the paper was written; small side research (industry vs. research,
+  Docker basics).
 - **Discussion roles need only the paper:** presenter, advocate, critic/reviewer,
   practitioner. Don't use roles that need prior materials (archaeologist, hacker).
 - **One file per paper plus a cross-paper file.** Don't put everything in one file.
@@ -118,6 +139,7 @@ tests and rating sheets) continues in the **original chat**. In the new chat:
 
 > Please read `HANDOFF.md` and `templates/README.md` in the repo, look at
 > `Vorl_1/` as the worked example, then prepare lecture 2 (`Vorl_2/`) for the
-> slides and two papers I'm attaching: reading guide, one discussion file per
-> paper and a cross-paper file, following the templates. Commit and push when
+> slides and two papers I'm attaching: reading guide, condensed notes and a
+> discussion file per paper, a cross-paper file, and a moderation plan (I'm
+> moderating this discussion), following the templates. Commit and push when
 > done.
