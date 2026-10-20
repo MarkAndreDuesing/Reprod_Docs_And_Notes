@@ -40,3 +40,9 @@ speaking rates were re-calibrated on this paper (`refine_calibration.py`).
 | 06 | `heumueller-06-related-work.mp3` | Related work | 25–27 | §7; §8 skipped (heard in 01); references, licence, author details skipped | – |
 
 Total about 69 min.
+
+## Round 2 result
+
+Ratings saved in `voice-test-round2/ratings-round2.csv`: 5 good, 23 medium, 33 bad.
+The 28 good and medium voices (with their refined speed calibration) are in
+`voices-round3.csv` for round 3 on the next paper.
