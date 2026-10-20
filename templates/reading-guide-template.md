@@ -48,7 +48,7 @@ reading the text, then check.
 | **Method** | **~25 %** | Methodology | **Read slowly**: sample, definitions, who classified, how validated, judgement calls |
 | Break | ~4 % | | |
 | Results | ~20 % | Evaluation / results | Map each result to a research question; check effect sizes |
-| Discussion & threats | ~15 % | Discussion, threats to validity | Compare the authors' threats with your doubts |
+| Discussion & threats | ~15 % | Discussion, threats to validity | Compare the authors' threats with your doubts. Tip: skim these sections already in the survey block, so you don't write critique the authors already address |
 | Related work | ~4 % | Related work | Skim for links |
 | **Synthesis** | **~15 %** | — | Fill in the discussion file |
 
@@ -63,6 +63,8 @@ If you fall behind, cut background and related work, **never** method or synthes
 | Synthesis | 30 min | Fill in the discussion file; compare with the other papers |
 
 ## Standard questions for empirical papers
+
+- **Terminology:** which definitions does the paper use (2011 or 2020), and how do they map to the lecture's 2020 definitions?
 
 - **Definitions:** how is the key concept measured? What counts and what doesn't?
 - **Sample:** which venues/years/subjects? Does it generalise?
