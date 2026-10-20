@@ -28,6 +28,8 @@ you the lecture slides and two papers.
 | `templates/moderation-template.md` | **The user moderates lecture 2.** Question sequence and the quality test for discussion questions |
 | `Vorl_1/reading-guide.md` | Filled example: per-block time plan mapped to real page ranges |
 | `Vorl_1/discussion/*.md` | Filled examples: one file per paper and `cross-paper.md` |
+| `Vorl_1/notes/collberg-proebsting-2016.md` | Filled example of condensed notes, made from the user's own snippets and comments |
+| `Vorl_1/seminar-notes.md` | The user's notes from the week-1 seminar: what they focus on and what they want when moderating |
 | `templates/tts-plan-template.md`, `templates/tools/`, `Vorl_1/audio/` | Text-to-speech work. **Handled in a separate chat; leave it alone** (see below) |
 
 ## Steps for the new week
@@ -122,6 +124,12 @@ you the lecture slides and two papers.
   could not be opened, and mark facts recalled from memory as such.
 
 ## Not part of this chat: text-to-speech
+
+Current state, for reference: two voice-test rounds are done (Paper 1 with 110
+voices, Paper 2 with 61). Ratings are in `Vorl_1/audio/voice-test*/ratings-round*.csv`,
+the round-3 shortlist of 28 voices is `Vorl_1/audio/voices-round3.csv`, and
+`Vorl_1/audio/tts-plan.md` records the plan, track lists and rating-sheet links.
+
 
 The TTS work (turning papers into British-English MP3s with Piper, voice
 tests and rating sheets) continues in the **original chat**. In the new chat:
