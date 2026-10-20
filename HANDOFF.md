@@ -75,8 +75,8 @@ you the lecture slides and two papers.
    moderates the lecture-2 discussion. Questions must lead to real
    discussion: not obvious, not "I don't know"-open, with a hook in the
    paper and two defensible opposing answers. Include 1–2 outside-the-box
-   questions and favour "how could incentives be aligned?" over blame.
-   Add short background facts (current practice, technology basics).
+   questions and favour solutions over blame. Add short background facts
+   (current practice, technology basics).
 9. **Update the root `README.md`** with a line for `Vorl_N/`.
 10. **Commit and push**, then summarise the strongest points in chat.
 
@@ -93,12 +93,11 @@ you the lecture slides and two papers.
   - a correlation was described as causation (tiny Cliff's δ);
   - "weak repeatability" only means the code builds;
   - one paper is sceptical of VMs while the other recommends containers.
-- **Focus areas** (from the week-1 seminar notes, details in `templates/README.md`):
-  incentive alignment instead of blame; what guidelines or regulation could
-  follow and how they'd be circumvented; conflicting guidelines; long-term
-  archiving cost and who pays; whether citations measure impact; what changed
-  since the paper was written; small side research (industry vs. research,
-  Docker basics).
+- **Discussion angles** (details and week-1 examples in `templates/README.md`):
+  root causes and solutions over blame; practical consequences such as rules
+  or policies and how they'd be circumvented; long-term view and cost;
+  whether the measures behind results are valid; then vs. now; short side
+  research for background.
 - **Discussion roles need only the paper:** presenter, advocate, critic/reviewer,
   practitioner. Don't use roles that need prior materials (archaeologist, hacker).
 - **One file per paper plus a cross-paper file.** Don't put everything in one file.

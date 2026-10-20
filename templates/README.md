@@ -64,22 +64,21 @@ lowercase, e.g. `heumueller-et-al-2020.md`.
 
 ## Focus areas the user cares about
 
-Learned from week 1 (seminar notes):
-- **Incentives:** guidelines and badges help, but incentives are still
-  misaligned. Ask how they could be aligned, rather than blaming individual
-  researchers, supervisors, venues, funders or universities.
-- **Guidelines and regulation:** what concrete rules could follow from the
-  paper (venue rules, funder rules, even government regulation), how people
-  might circumvent them, and where existing guidelines conflict (e.g. NASA
-  requires GitHub, others require persistent archives).
-- **Long-term cost:** even the best archiving needs maintenance (we won't be
-  using Docker in 40 years); more options and persistence cost money, so who
-  funds it? Which format is most durable (source code?).
-- **Metrics:** are citations a good measure of impact at all?
-- **Then vs. now:** what has changed since the paper (e.g. Zenodo and ACM
-  artifact requirements today).
-- **Side research worth a few minutes:** e.g. how artifact practice differs
-  between research and industry, how Docker containers work.
+General angles that make a paper worth discussing (week-1 examples in brackets):
+- **Root causes and solutions over blame:** when a paper identifies a problem,
+  ask what would actually fix it and who would have to act, rather than who is
+  at fault. (Week 1: misaligned incentives for sharing artifacts.)
+- **Practical consequences:** what rules, guidelines or policies could follow
+  from the paper, how people might work around them, and where existing
+  rules conflict. (Week 1: one guideline requires GitHub, others persistent archives.)
+- **Long-term view and cost:** does the proposal still hold in 10–40 years,
+  and who pays to keep it working? (Week 1: archiving formats age.)
+- **Are the measures valid?** Question the metric behind a result, not only the
+  result. (Week 1: are citations a good measure of impact?)
+- **Then vs. now:** what has changed in practice since the paper was written.
+- **Short side research:** a few minutes on background that makes the
+  discussion better informed (e.g. a technology the paper relies on, or how
+  practice differs between research and industry).
 - **The user's own opinions:** keep and tighten them, and add a counterpoint.
 
 ## Balance to aim for
