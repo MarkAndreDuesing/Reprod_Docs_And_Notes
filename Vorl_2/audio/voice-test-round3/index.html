@@ -85,6 +85,12 @@ kbd{font-family:var(--f-mono);font-size:.75rem;border:1px solid var(--line);bord
       <output id="speedOut" for="speed">1.00×</output>
       <button type="button" id="speedReset" class="tab">Reset</button>
     </div>
+    <div class="speed">
+      <span>Offline</span>
+      <button type="button" id="offSave" class="tab">Save all tracks on this device</button>
+      <button type="button" id="offClear" class="tab" hidden>Remove</button>
+      <span id="offStatus" class="hint" aria-live="polite">Not saved. Tracks stream (about 35 MB in total).</span>
+    </div>
     <div class="now" aria-live="polite">
       <span class="lbl">Now</span>
       <span id="nowText">Press play to start</span>
@@ -177,7 +183,27 @@ function tabs(){
     b.onclick=()=>seek(ti,0,false);el.append(b)});markTab()}
 function markTab(){[...document.querySelectorAll(".tab")].forEach((b,i)=>b.setAttribute("aria-pressed",i===curTrack))}
 
-function load(ti){curTrack=ti;player.src=TRACKS[ti].stem+".mp3";markTab()}
+// Offline: tracks saved in IndexedDB play from this device without network.
+const DBN="voice-test-round3-audio";let dbp=null;
+function db(){if(!dbp)dbp=new Promise((res,rej)=>{let r;try{r=indexedDB.open(DBN,1)}catch(e){return rej(e)}r.onupgradeneeded=()=>r.result.createObjectStore("t");r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});return dbp}
+async function idb(mode,fn){const d=await db();return new Promise((res,rej)=>{const tx=d.transaction("t",mode),q=fn(tx.objectStore("t"));tx.oncomplete=()=>res(q&&q.result);tx.onerror=()=>rej(tx.error)})}
+const getT=s=>idb("readonly",o=>o.get(s)).catch(()=>null);
+let curURL=null;
+async function load(ti){curTrack=ti;markTab();const s=TRACKS[ti].stem,b=await getT(s);if(curTrack!==ti)return;
+  if(curURL){URL.revokeObjectURL(curURL);curURL=null}
+  if(b){curURL=URL.createObjectURL(b);player.src=curURL}else player.src=s+".mp3"}
+const offStatus=document.getElementById("offStatus"),offSave=document.getElementById("offSave"),offClear=document.getElementById("offClear");
+async function offRefresh(){let n=0,bytes=0;for(const t of TRACKS){const b=await getT(t.stem);if(b){n++;bytes+=b.size}}
+  const mb=(bytes/1048576).toFixed(0);offClear.hidden=n===0;
+  offStatus.textContent=n===TRACKS.length?`All ${n} tracks saved on this device (${mb} MB). Playback needs no network.`:n?`${n} of ${TRACKS.length} tracks saved (${mb} MB).`:"Not saved. Tracks stream (about 35 MB in total).";
+  offSave.textContent=n===TRACKS.length?"Saved":"Save all tracks on this device";offSave.disabled=n===TRACKS.length}
+offSave.onclick=async()=>{offSave.disabled=true;try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{})}catch(e){}
+  try{for(const [i,t] of TRACKS.entries()){if(await getT(t.stem))continue;offStatus.textContent=`Downloading track ${i+1} of ${TRACKS.length}…`;
+    const r=await fetch(t.stem+".mp3");if(!r.ok)throw new Error(r.status);const b=await r.blob();await idb("readwrite",o=>o.put(b,t.stem))}
+    await offRefresh();if(!curURL)load(curTrack)}
+  catch(e){offStatus.textContent="Saving stopped: the connection dropped or this browser blocks storage here. Try again on Wi-Fi.";offSave.disabled=false}};
+offClear.onclick=async()=>{try{await idb("readwrite",o=>o.clear())}catch(e){}offRefresh()};
+offRefresh();
 function seek(ti,t,play){
   const go=()=>{player.currentTime=t;if(play)player.play().catch(()=>{})};
   if(ti!==curTrack||!player.src){load(ti);player.addEventListener("loadedmetadata",go,{once:true})}else go()}
