@@ -11,6 +11,7 @@ Vorl_N/
 ├── <paper 1>.pdf
 ├── <paper 2>.pdf
 ├── reading-guide.md          ← time plan for this week's papers (from reading-guide-template.md)
+├── slides/                   ← discussion deck (skill: .claude/skills/discussion-slides)
 ├── moderation.md             ← only in weeks the user moderates (from moderation-template.md)
 ├── audio/                    ← optional MP3s + tts-plan.md (from tts-plan-template.md)
 ├── notes/
@@ -58,6 +59,9 @@ lowercase, e.g. `heumueller-et-al-2020.md`.
    and replicability; older papers often use the 2011 ones (e.g. Collberg &
    Proebsting). Always map each paper's terms to the 2020 ones.
 9. **Pick your top 3** points to bring to the session.
+11. **Slides (if asked):** use the `discussion-slides` skill
+   (`.claude/skills/discussion-slides/SKILL.md`): fixed structure, plain section
+   headers, house style.
 10. **If the user moderates:** write `moderation.md` from
    `moderation-template.md` (question sequence, quality test for questions,
    outside-the-box questions, background facts).
