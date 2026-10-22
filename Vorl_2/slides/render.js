@@ -12,7 +12,7 @@ const pres = new pptxgen(); pres.layout = "LAYOUT_WIDE"; pres.theme = { headFont
 pres.title = "Artifact Evaluation – Lecture 2 Discussion (" + T.name + ")";
 const M = 0.7, W = 13.333 - 2 * M; let n = 0;
 pres.defineSlideMaster({ title: "BASE", background: { color: T.bg }, slideNumber: { x: 12.3, y: 6.95, w: 0.6, h: 0.35, fontSize: 11, color: T.muted, fontFace: T.font },
-  objects: [{ text: { text: "Lecture 2 · Artifact evaluation", options: { x: M, y: 6.95, w: 6, h: 0.35, fontSize: 11, color: T.muted, fontFace: T.font } } }] });
+  objects: [] });
 pres.defineSlideMaster({ title: "DARK", background: { color: T.dark } });
 const t = (s, x, o) => s.addText(x, Object.assign({ isTextBox: true, fontFace: T.font, color: T.fg, valign: "top", margin: 0 }, o));
 const box = (s, x, y, w, h, c) => s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y, w, h, rectRadius: 0.06, fill: { color: c }, line: { color: c }, objectName: "panel" + (n++) });
