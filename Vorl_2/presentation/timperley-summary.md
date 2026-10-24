@@ -102,8 +102,10 @@ solutions. This paper asks *why making good artifacts is hard*, with some overla
   results that place artifacts in the wider SE community. A secondary analysis with DoI as
   the analytical tool contextualises and integrates these results and examines
   relationships between findings.
-- **Parallel-convergent mixed-methods design (§3.5, p. 10):** _plain-language note to add
-  after research (my "meaning?" note)._
+- **Parallel-convergent mixed-methods design (§3.5, p. 10):** quantitative data (here: the
+  publication survey) and qualitative data (here: the author survey) are collected **at the
+  same time**, analysed **separately**, then **merged** in one integrated analysis to see
+  where they agree or differ (triangulation).
 
 ## §1 Introduction (points only made here)
 
@@ -190,12 +192,11 @@ Everything else from the Introduction is merged into the sections below.
     - Q15 up to three improvements
   - **All RQs:** Q16 other positive or negative experiences
   - **Demographics:** Q1 role, Q2 number of publications
-- **Analysis:** descriptive coding, then axial coding (see Definitions), done
-  collaboratively by three domain experts and one methodologist.
+- **Analysis:** descriptive, then axial coding (see Definitions) by three domain experts and
+  one methodologist.
 
 ### §3.3 Secondary analysis (p. 9)
-- See Definitions: DoI integrates the two primary studies and examines relationships
-  between findings. It is applied in §5, which is outside my section.
+- Defined under Definitions; applied in §5, outside my section.
 
 ### §3.4 Recommendations (pp. 9–10)
 - Recommendations address specific challenges and follow IS principles.
@@ -221,10 +222,8 @@ Everything else from the Introduction is merged into the sections below.
   - An artifact = a paper links to accompanying material.
   - Papers may have artifacts that aren't mentioned in the paper and could only be found by
     searching or contacting authors. Authors were not contacted, for practical reasons.
-  - The mixed-methods parallel-convergent design has three parts:
-    - quantitative data on artifact publication and evaluation
-    - survey data on authors' perceptions, needs and experiences
-    - an integrated analysis that combines them
+  - Mitigation: a parallel-convergent mixed-methods design (see Definitions) combining
+    publication data, survey data and an integrated analysis.
 - **Internal:**
   - Surveys can be biased, intentionally or not, by respondents and by researchers.
   - Mitigations: respondents report their own experiences; collaborative, documented
@@ -253,12 +252,6 @@ Everything else from the Introduction is merged into the sections below.
   - **Facilitate reuse:** tools and datasets that others can reuse and extend
   - **Improving understanding:** additional information not suited to a paper (technical
     details, raw and preprocessed results)
-- **Insights for RQ1 (p. 13):**
-  - an increasing majority of papers contain artifacts
-  - artifacts are seen as inherently valuable
-  - they are shared to support claims, aid understanding and enable further research
-  - creating and sharing them is an established community norm
-
 ## §4.2 RQ2: Challenges of creating, sharing, using and reviewing artifacts
 
 The challenges were found by thematic analysis of the survey answers (Table 4, pp. 14–15).
@@ -369,7 +362,8 @@ Perspectives: ■ creator, ▲ user, ★ reviewer. Points raised by only one gro
 - **[user]** Artifacts can be hard to use for the purpose stated in the paper: they "don't
   really serve the purpose stated in papers" and work only for very limited use cases
   (p. 19).
-- Using them may need major changes (modified source 60, reimplemented 28; Table 5).
+- Using them may need major changes, up to modifying or reimplementing them (counts
+  under C2).
 
 ### C6 Lack of standards and guidelines ■ ★
 - **[creator]** No clear standards or expectations for the **packaging, contents and
@@ -461,22 +455,3 @@ Perspectives: ■ creator, ▲ user, ★ reviewer. Points raised by only one gro
 - Even where communication is allowed, problems persist with **unresponsive authors**:
   without a defined protocol, reviewers may wait days without knowing whether a fix will
   come (p. 24).
-
-### Insights for RQ2 (pp. 18, 20, 24)
-- **Creators (RQ2.1):**
-  - artifact work is a risky, poor investment with little personal reward
-  - maintenance is hard once students graduate
-  - missing standards and incentives keep quality low
-  - free, large, indefinite hosting is hard to find
-  - some artifacts can't be shared (privacy, IP, ecosystems)
-- **Users (RQ2.2):**
-  - artifacts become unavailable and unmaintained over time
-  - missing documentation, non-portable code and licences hinder reuse
-  - users often have to modify artifacts
-  - all of this is made worse by missing community standards
-- **Reviewers (RQ2.3):**
-  - few artifact papers are submitted (26 %), most are accepted (86 %)
-  - views on the purpose and depth of review vary
-  - time, resources and licences limit evaluation
-  - reviewing is less rewarded than paper review
-  - poor communication plus unclear standards frustrate both sides
