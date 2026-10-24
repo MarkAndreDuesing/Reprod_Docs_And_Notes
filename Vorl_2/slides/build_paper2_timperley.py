@@ -28,6 +28,8 @@ def new(t):
     el=copy.deepcopy(title_el); s.shapes._spTree.append(el)
     sh=s.shapes[-1]; sh.text_frame.paragraphs[0].runs[0].text=t
     s.shapes._spTree.append(copy.deepcopy(numph)); return s
+import re as _re
+def strip(t): return _re.sub(r'\s*\((?:p|pp|Table|Fig)\.?\s[^)]*\)','',t)
 def tb(s,x,y,w,h,paras,size=18,anchor=None,align=None,space=6):
     """paras: list of paragraphs; each paragraph = list of runs (text, dict)"""
     box=s.shapes.add_textbox(Inches(x),Inches(y),Inches(w),Inches(h)); tf=box.text_frame; tf.word_wrap=True
@@ -38,7 +40,7 @@ def tb(s,x,y,w,h,paras,size=18,anchor=None,align=None,space=6):
         if align: para.alignment=align
         if isinstance(runs,str): runs=[(runs,{})]
         for txt,o in runs:
-            r=para.add_run(); r.text=txt; f=r.font; f.name='Arial'
+            r=para.add_run(); r.text=strip(txt); f=r.font; f.name='Arial'
             f.size=Pt(o.get('size',size)); f.bold=o.get('b',False); f.italic=o.get('i',False)
             f.color.rgb=o.get('c',K)
     return box
@@ -55,14 +57,14 @@ def N(t,**o): return (t,dict(**o))
 
 # ---------- 12 General Summary
 s=S(12); clear_body(s)
-tb(s,.7,1.75,3.3,4.8,[[B('Week 1: why are working artifacts so rare?',c=G,size=22)],[B('This paper: why is making good artifacts so hard?',c=G,size=22)]],space=18)
-tb(s,4.34,1.75,8.3,5,[
- [B('Problem: '),N('artifacts (tools, benchmarks, data) should support claims and future research, but in practice fall short')],
- [B('Goal: '),N('understand the challenges of creating, sharing, using and reviewing artifacts')],
- [B('Approach: '),N('mixed methods: survey of SE publications + online survey of SE researchers, seen from three angles: creators, users, reviewers')],
- [B('Finding: '),N('mismatched expectations between the groups and too little reward for creators and reviewers')],
- [B('Output: '),N('recommendations to improve artifact quality (later section)')]],size=20,space=12)
-notes(s,'Abstract, p. 1; intro pp. 2-3. Issues stem from four areas: communication, social system (reward), time (bitrot), technical aspects (ease of use) (p. 3). Authors argue AECs are well positioned to fix many issues (p. 3). Earlier work (Collberg) showed artifacts often lack documentation and have unstated dependencies; the controversy around it shows there are no clear community standards (p. 2).')
+tb(s,.7,1.75,3.3,4.8,[[B('Why is making good artifacts hard?',c=G,size=24)],[B('Potential solutions to this?',c=G,size=24)]],space=18)
+tb(s,4.34,1.6,8.3,5.2,[
+ [B('Problem: '),N('artifacts (tools, benchmarks, data) should back claims and enable future research, but in practice fall short')],
+ [B('Approach: '),N('mixed methods: survey of artifacts in top SE publications + online survey of SE researchers; creator, user and reviewer views')],
+ [B('Findings: '),N('sharing is valued and widespread, but 12 challenges stand in the way; key issues are mismatched expectations and too little reward for creators and reviewers')],
+ [B('Analysis: '),N('Diffusion of Innovations links the challenges via communication, time and the social system')],
+ [B('Solutions: '),N('8 recommendations for creators, reviewers, organisers and community leaders; AECs are well placed to raise artifact quality')]],size=19,space=12)
+notes(s,'Abstract p. 1; intro pp. 2-3. Issues stem from four areas: communication, social system (reward), time (bitrot), technical aspects (p. 3). Collberg et al.\'s earlier work and its controversy show there are no clear community standards (p. 2). Secondary analysis (§5) and recommendations (§6) are presented by a teammate.')
 
 # ---------- 13 Terminology
 s=S(13); clear_body(s)
@@ -80,7 +82,7 @@ notes(s,'Motivations for sharing: let others replicate, reproduce or build upon 
 
 # ---------- 13b badges
 s13b=new('Terminology / Definitions')
-label(s13b,'ACM badges (policy v1.1, 2020; lecture slide 9)')
+label(s13b,'ACM badges [1, 2]')
 data=[('Question','Badge','Required'),
  ('Does it work?','Evaluated – Functional','documented, consistent, complete, exercisable'),
  ('','Evaluated – Reusable','Functional + well structured and documented for reuse'),
@@ -93,10 +95,10 @@ for rw in tbl.rows: rw.height=Inches(.5)
 for i,row in enumerate(data):
     for j,val in enumerate(row):
         c=tbl.cell(i,j); c.text=''; c.fill.solid(); c.fill.fore_color.rgb=G if i==0 else (PANEL if i%2 else W)
-        r=c.text_frame.paragraphs[0].add_run(); r.text=val; f=r.font; f.name='Arial'; f.size=Pt(17)
+        r=c.text_frame.paragraphs[0].add_run(); r.text=strip(val); f=r.font; f.name='Arial'; f.size=Pt(17)
         f.bold=(i==0 or j==1); f.color.rgb=W if i==0 else K
         c.margin_left=c.margin_right=Inches(.1)
-tb(s13b,.7,5.5,11.93,.6,[[N('Paper (p. 4): "Available, Evaluated, Results Validated". ACM only defines the badges; each conference’s AEC sets its own concrete rules.',c=M,size=15)]])
+tb(s13b,.7,5.5,11.93,.6,[[N('The paper names "Available, Evaluated, Results Validated"; Results Validated is now split in two. ACM only defines the badges; each conference’s AEC sets its own concrete rules [1, 3].',c=M,size=15)]])
 notes(s13b,'Added from research (timperley-research.md item 1). Badges are independent; only one Evaluated level. FSE and ICSE use ACM badges since July 2020; badges shown on front page and in ACM DL (p. 4). 2020 revision swapped Reproduced/Replicated to match NISO RP-31-2021. Example of concrete rules: ICSE 2026 30-min install limit, README structure, accepted archives.')
 
 # ---------- 13c DoI / IS
@@ -113,39 +115,29 @@ panel(s13c,.7,5.3,11.93,1.3)
 tb(s13c,.9,5.4,11.5,1.1,[[B('Implementation Science (IS): ',c=G),N('iterative, evidence-based way of moving research into practice (from medicine): practices identified, trialled, observed, improved (p. 6). Used to shape the recommendations.')]],size=18,anchor=MSO_ANCHOR.MIDDLE)
 notes(s13c,'DoI p. 5-6; IS p. 6. Coding terms (p. 8-9): descriptive coding = label each answer segment; axial coding = organise codes, find dominant themes and improvement opportunities; thematic analysis shows the range of themes, not how common they are.')
 
-# ---------- 15 Methodology overview
+# ---------- 15 Methodology (single slide)
 s=S(15); clear_body(s)
-tb(s,.7,1.4,11.93,.6,[[B('Mixed methods, parallel-convergent: ',c=G),N('two studies run at the same time, analysed separately, then merged (p. 10)')]],size=19)
-for x,h,body in ((.7,'§3.1 Publication survey',['all technical-track papers','ICSE · FSE · ASE · EMSE','2014-2018','→ prevalence and availability']),
-                 (6.93,'§3.2 Author survey',['online questionnaire','authors of 2018 papers','creators · users · reviewers','→ perceived value and challenges'])):
-    panel(s,x,2.3,5.7,2.6,LG)
-    tb(s,x+.2,2.4,5.3,2.4,[[B(h,c=G,size=21)]]+[[N(t,size=18)] for t in body],space=6)
-arrow=s.shapes.add_shape(MSO_SHAPE.DOWN_ARROW,Inches(6.37),Inches(5.0),Inches(.6),Inches(.5)); arrow.fill.solid(); arrow.fill.fore_color.rgb=G; arrow.line.fill.background()
-panel(s,2.5,5.6,8.33,1.0)
-tb(s,2.7,5.65,7.93,.9,[[B('Integrated results (§4): ',c=G),N('RQ1 value · RQ2 challenges')]],size=19,anchor=MSO_ANCHOR.MIDDLE,align=PP_ALIGN.CENTER)
-notes(s,'Fig. 1, p. 7; contributions p. 3. RQs p. 6. Secondary analysis (DoI, §5) and recommendations (§6) are covered by a teammate. Replication package on Zenodo: survey materials, quantitative results, publication data, mining scripts (p. 3).')
-
-# ---------- 15b details
-s15b=new('Methodology')
-for x,h,items in ((.7,'§3.1 Publication survey (p. 7)',[
-    'URLs extracted from paper PDFs, then checked by hand',
-    'artifact = any linked material',
-    'available = URL reachable at one check (early 2019)',
-    'FSE AEC chairs asked for submission and acceptance data']),
-  (6.93,'§3.2 Author survey (pp. 7-9)',[
-    'closed + open questions; branching shows role-specific parts',
-    'questions grouped by RQ: value · creating · using · reviewing',
-    'descriptive, then axial coding by 3 domain experts + 1 methodologist',
-    'themes show the range of experiences, not how common they are'])):
-    panel(s15b,x,1.6,5.7,5.0)
-    tb(s15b,x+.2,1.7,5.3,4.8,[[B(h,c=G,size=21)]]+[[N('• '+t,size=18)] for t in items],space=12)
-notes(s15b,'Publication survey: 899 artifacts in 1434 papers; availability checked 29 Jan - 6 Feb 2019. Author survey: 744 emailed, 153 of 698 delivered completed (22%); 91% academic; creators 137, users 129, reviewers 32 (Table 2). Table 1 grouping: RQ1 Q5,Q10,Q12 · RQ2.1 Q3,Q4,Q6-Q9 · RQ2.2 Q11 · RQ2.3 Q13-Q15 · all Q16 · demographics Q1,Q2.')
+tb(s,.7,1.35,11.93,.6,[[B('Mixed methods, parallel-convergent: ',c=G),N('two studies at the same time, analysed separately, then merged')]],size=19)
+for x,h,items in ((.7,'§3.1 Publication survey',[
+    'all technical-track papers, ICSE · FSE · ASE · EMSE, 2014-2018',
+    'links found in the papers, checked by hand',
+    'artifact = any linked material; available = link still works',
+    'AEC chairs asked for submission and acceptance data']),
+  (6.93,'§3.2 Author survey',[
+    'online questionnaire for authors of 2018 papers',
+    'branching by role: creator, user, reviewer',
+    'open answers coded into themes (range, not frequency)',
+    'questions mapped to RQ1 (value) and RQ2 (challenges)'])):
+    panel(s,x,2.15,5.7,4.0,LG)
+    tb(s,x+.2,2.25,5.3,3.8,[[B(h,c=G,size=21)]]+[[N('• '+t,size=18)] for t in items],space=10)
+tb(s,.7,6.3,11.93,.5,[[B('→ ',c=G),N('merged into the results: RQ1 value · RQ2 challenges')]],size=18)
+notes(s,'Fig. 1 p. 7; §3.1 p. 7; §3.2 pp. 7-9; design p. 10. 899 artifacts in 1434 papers; availability checked 29 Jan - 6 Feb 2019. 744 authors emailed, 153 of 698 delivered completed (22%); 91% academic; creators 137, users 129, reviewers 32. Coding: descriptive then axial, 3 domain experts + 1 methodologist. Secondary analysis and recommendations covered by a teammate.')
 
 # ---------- 16 RQ1
 s=S(16); clear_body(s)
 label(s,'RQ1 · Does the community value artifacts?')
 panel(s,.7,1.7,11.93,1.6,LG)
-tb(s,.9,1.75,11.5,1.5,[[B('Yes: ',c=G),N('artifacts are seen as inherently valuable; sharing is an established and growing norm (most papers now link one, p. 11)')],
+tb(s,.9,1.75,11.5,1.5,[[B('Yes: ',c=G),N('artifacts are seen as inherently valuable; sharing is an established and growing norm (most papers now link one)')],
  [N('Not every paper needs one, but sharing should be encouraged and rewarded; replication is hard and unreliable without artifacts')]],size=19,anchor=MSO_ANCHOR.MIDDLE)
 tb(s,.7,3.5,11.93,.4,[[B('Why authors share (Table 3, p. 12)',c=M,size=16)]])
 x=.7
@@ -191,7 +183,7 @@ def rq2(lab,items,foot=None,note=''):
         for k,(who,txt) in enumerate(pts):
             pa=tf.paragraphs[0] if k==0 else tf.add_paragraph(); pa.space_after=Pt(3)
             for t,o in symruns(who,16)+[N(txt,size=16)]:
-                r=pa.add_run(); r.text=t; r.font.name='Arial'; r.font.size=Pt(o['size']); r.font.bold=o.get('b',False); r.font.color.rgb=o.get('c',K)
+                r=pa.add_run(); r.text=strip(t); r.font.name='Arial'; r.font.size=Pt(o['size']); r.font.bold=o.get('b',False); r.font.color.rgb=o.get('c',K)
         for cc in (tbl.cell(i,0),tbl.cell(i,1)): cc.margin_top=cc.margin_bottom=Inches(.04)
     if foot: tb(s,.7,6.55,11.93,.45,[[N(foot,c=M,size=14)]])
     notes(s,note); return s
@@ -243,7 +235,15 @@ move(s13b,S(13)); move(s13c,s13b)
 s15=[x for x in p.slides][16-1+0] if False else None
 order=list(p.slides)
 s15=order[order.index(s13c)+2]  # 14 RQ, then 15 Methodology
-move(s15b,s15)
-s16=list(p.slides)[list(p.slides).index(s15b)+1]
+s16=list(p.slides)[list(p.slides).index(s15)+1]
 move(s16b,s16); move(r1,s16b); move(r2,r1); move(r3,r2); move(r4,r3)
+sref=new('References')
+tb(sref,.7,1.6,11.93,4.5,[
+ [B('[1] '),N('ACM: Artifact Review and Badging, Version 1.1 (2020). acm.org/publications/policies/artifact-review-and-badging-current')],
+ [B('[2] '),N('Winter & Beyer: Introductory Lecture, Reproducibility of Scientific Results in SE Research, LMU (slide 9)')],
+ [B('[3] '),N('ICSE 2026 Artifact Evaluation track, call for submissions. conf.researchr.org/track/icse-2026/icse-2026-artifact-evaluation')]],size=18,space=14)
+ty=[x for x in p.slides if any(sh.has_text_frame and sh.text_frame.text=='Thank you for your attention' for sh in x.shapes)][0]
+ids=list(lst)
+def eid(sl): return [e for e in ids if p.part.rels[e.rId]._target is sl.part][0]
+lst.remove(eid(sref)); eid(ty).addprevious(eid(sref))
 p.save(OUT); print('slides',len(p.slides))
