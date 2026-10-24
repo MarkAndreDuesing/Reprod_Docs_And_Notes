@@ -4,9 +4,11 @@ Background for the discussion-question file. Each item starts with my handwritte
 where it sits in the paper.
 
 **Source status:**
-- acm.org blocks direct access from this environment, so ACM policy content comes from
-  search results, conference calls that quote the policy, and the lecture slides.
-- Anything I couldn't confirm is marked _(unverified)_.
+- acm.org blocks direct access from this environment, so the ACM policy wording was
+  verified via pages that quote it verbatim (ACM SIGIR, ESEC/FSE 2021, ICSE 2026 calls)
+  and the lecture slides.
+- Every point below was checked with a web search. Where no source exists, the point is
+  marked _(my reasoning)_.
 
 ---
 
@@ -39,8 +41,8 @@ levels is awarded.
 | *Does the artifact work?* | **Artifacts Evaluated – Functional** | Documented, consistent, complete, exercisable, with appropriate evidence of verification and validation |
 | | **Artifacts Evaluated – Reusable** | Functional, plus quality that "significantly exceeds minimal functionality"; documented and structured well enough for reuse and repurposing |
 | *Is the artifact permanently available?* | **Artifacts Available** | Placed on a **publicly accessible archival repository** with a DOI or persistent link. Personal web pages or GitHub/GitLab alone are **not** enough; typical choices are Zenodo, Figshare, Dryad or Software Heritage. No formal evaluation needed |
-| *Can the results be confirmed?* | **Results Reproduced** | (since 2020) A different team obtains the main results **using the authors' artifacts** |
-| | **Results Replicated** | (since 2020) A different team obtains the main results **without the authors' artifacts** |
+| *Can the results be confirmed?* | **Results Reproduced** | (v1.1, 2020) "The main results of the paper have been obtained in a subsequent study by a person or team other than the authors, using, in part, artifacts provided by the author" |
+| | **Results Replicated** | (v1.1, 2020) The same, but obtained **without relying on** the author-supplied artifacts |
 
 These match the lecture's 2020 definitions (slide 3/24).
 
@@ -106,21 +108,33 @@ These match the lecture's 2020 definitions (slide 3/24).
   - splitting one dataset across many records to dodge the limit is not allowed
   - each upload is immutable; updates become new versions with their own DOI, so the
     version cited in a paper never changes
-  - GitHub releases can be archived to Zenodo automatically _(widely documented; not
-    re-checked here)_
+  - **GitHub integration:** once a repository is switched on in Zenodo, each new GitHub
+    release is archived automatically with a DOI per version plus a "concept DOI" for all
+    versions. Releases made before switching it on aren't archived. ICSE 2026 accepts
+    "GitHub linked to a Zenodo DOI" for the Available badge.
   - Zenodo promises only **bit-level preservation**: files stay intact, but old formats may
     become unreadable, so open formats are recommended
-  - I found **no** formal retention period. The often quoted "20 years" refers to CERN's
-    experimental programme, not a Zenodo guarantee.
-- **Software Heritage:** archives public source code (with intrinsic IDs, SWHIDs). Accepted
-  for the Available badge (ICSE 2025/2026), but source only, no data.
+  - **Retention policy:** "Items will be retained for the lifetime of the repository. This
+    is currently the lifetime of the host laboratory CERN, which currently has an
+    experimental programme defined for the next 20 years at least." Metadata is stored
+    separately and stays available even if the data doesn't. Zenodo makes "no promises of
+    usability and understandability" over time.
+  - For comparison: most funder data-retention requirements are 10–20 years.
+- **Software Heritage:** archives public source code. Each archived object gets a
+  **SWHID**, a cryptographic hash of its content, so the same code always has the same ID,
+  standardised as ISO/IEC 18670. ICSE 2026 names it as an archival option for the Available
+  badge. Source code only, no data.
 - **What Zenodo doesn't solve:**
   - data over 50–200 GB
   - **living** artifacts (use GitHub for development, Zenodo snapshots per paper; this is
     Timperley's Rec 3)
   - **runnability**: an archived artifact can still rot (C2/C3)
-  - **anonymity for double-blind review** (C8). Anonymous hosts such as
-    anonymous.4open.science are used for that _(from memory)_.
+  - **anonymity for double-blind review** (C8). That is covered by **Anonymous GitHub**
+    (anonymous.4open.science), a proxy that mirrors a repository and replaces identifying
+    terms and the owner name with placeholders. Some venues recommend it, but the authors
+    remain responsible for leaks (e.g. commit history). Links **expire** after the review
+    period: a 2026 reproducibility study found artifacts hosted there had "repository
+    expired". So it suits review, not archiving.
 - **Paper context:** data collected Jan–Feb 2019. One respondent (P19) already said Zenodo
   solved the double-blind hosting problem for them. Since then, ICSE has made archival hosting a
   condition for the Available badge, so the problem is now largely solved *by rule* for
@@ -128,15 +142,23 @@ These match the lecture's 2020 definitions (slide 3/24).
 
 ## 3. "What if your artifact is a few terabytes?" (C7, p. 17) and "what if it exceeds a normal PC's disk? → unreviewable" (C11, p. 23)
 
-Common options (general practice; partly from the sources below):
+What venues actually do:
+- **Agreed reduced scope:** MobiSys 2026's AE call says that for experiments with large
+  computation, data collection or transmission, reviewers and authors "could communicate
+  to decide a reduced but still representative scope of experiments".
+- **Remote access provided by the authors:** IISWC 2026 expects most artifacts to run on a
+  desktop or laptop; where that isn't enough, **authors must provide remote access** (e.g.
+  SSH, anonymised) to a capable system.
+- A study of AE in distributed systems recommends stating the time experiments need up
+  front, and validating a large parameter sweep by emulating only a subset.
+
+Further options _(my reasoning)_:
 - **Institutional or domain repositories** with larger quotas (university research data
   services, national infrastructures). Zenodo stops at about 200 GB.
 - **Share a representative subset** plus the scripts to regenerate or download the rest.
   Timperley's own Rec 2: a "representative proof-of-concept… on a smaller dataset".
 - **Share the generator, not the data:** e.g. a mining script plus the exact query and date,
   when the data is public (mining studies).
-- **Cloud-hosted evaluation:** the reviewer gets access to an environment where the data
-  already lives, rather than downloading it. See item 4.
 - So "unreviewable" mostly means "not reviewable on a laptop". AEs can review a subset, or
   review remotely, but both reduce what the badge certifies.
 
@@ -154,9 +176,14 @@ Common options (general practice; partly from the sources below):
   - access is by advance reservation, so reviewers may wait **weeks**
   - learning the platform takes time
   - some venues assign 3 reviewers per artifact (ICPP), which multiplies compute use
+- **Cloud credits have been tried, with mixed results:** for SOSP 2019 Microsoft donated
+  Azure credits, but the organisers found them "hard to leverage for the artifacts for
+  which they would have been most useful". SOSP 2023 allows commercial clouds only when
+  strictly necessary and when the **authors pay**, warning that budget may limit
+  evaluation. IISWC 2024 stated it could not provide compute.
 - **Not standard in SE:** ICSE 2026 provides no compute; authors only document hardware
-  needs. Timperley's Rec 7 (ACM/IEEE funding cloud credits) has not been implemented
-  there, as far as I can find.
+  needs. I found no SE venue (ICSE, FSE, ASE, ISSTA) offering reviewer cloud credits, so
+  Timperley's Rec 7 (ACM/IEEE-funded compute credits) has not been implemented there.
 - **Containers vs. consistency:** containers fix the *software* environment, not the
   *hardware*. Combined with a shared testbed they address both, which supports my p. 22 note
   that P18's complaint is not really about containers (see item 5).
@@ -166,12 +193,24 @@ Common options (general practice; partly from the sources below):
 - **VMs:** add virtualisation overhead and share the host with other loads, so absolute
   timings aren't comparable (P64; Collberg & Proebsting made the same point in week 1).
 - **Containers:** run at near-native speed on the host kernel, so the VM performance
-  problem largely disappears. P18's complaint is different: *build rot*. An image whose
-  Dockerfile downloads packages at build time can stop building, but a **saved image**
-  keeps working as long as the container runtime and CPU architecture are supported. So my
-  note is fair in part: the problem is rebuilding from a recipe, not containers as such.
-- **Ways AECs can handle performance claims** _(general practice; I found no source that
-  covers this specifically, so treat these as reasoned options)_:
+  problem largely disappears. P18's complaint is different: *build rot*.
+  - A Dockerfile with unpinned base images (tags like `latest`) or unpinned `apt-get`/pip
+    installs silently pulls newer versions on rebuild, so the same Dockerfile gives a
+    different image, or none (paper "Docker Does Not Guarantee Reproducibility", 2026).
+  - The fix: archive the **saved image** (`docker save` tarball with its digest), e.g. on
+    Zenodo as the Carpentries lesson recommends, plus a Dockerfile with base images and
+    dependencies pinned by digest/version as a best-effort rebuild path.
+- So my note is largely right: the problem is rebuilding from an unpinned recipe, not
+  containers as such. A saved image still needs a compatible container runtime and CPU
+  architecture in the future _(my reasoning)_.
+- **What venues actually ask for:** SPLASH 2026's AE criteria say that when results are
+  performance data, exact numbers depend on the hardware. Artifacts must therefore explain
+  how reviewers on other hardware can recognise that the **high-level results** still hold,
+  e.g. a trend, or one tool beating another on a class of inputs. Individual artifact guides
+  (an ICSE 2023 artifact, a 2025 Zenodo artifact guide) say the same: expect different
+  absolute numbers, check **trends, ratios and speedups**. There is no single formal
+  standard; the wording varies by venue.
+- **Further options** _(my reasoning, building on the above)_:
   - check **relative** claims (A is faster than B on the same machine) rather than absolute
     numbers
   - use **identical hardware** via shared testbeds (item 4)
@@ -220,7 +259,12 @@ Background for the discussion:
 - The ACM scheme deliberately separates "works" from "public" (slide 8), so full openness is
   not a precondition for evaluation.
 - Funders increasingly push openness: NSF requires data management plans (Timperley p. 34),
-  and EU Horizon Europe expects open science and data management plans _(from memory)_.
+  and **Horizon Europe** (EU) makes open access to research data mandatory under "as open
+  as possible, as closed as necessary". Exceptions (commercial exploitation, data
+  protection, confidentiality, security, IP) must be justified in the **mandatory data
+  management plan**; metadata should be open even when data is closed. Open-source licences
+  for software are strongly recommended, not required. This mirrors the ACM idea: openness
+  by default, documented exceptions.
 - Feasibility limits named in the paper: IP and contracts (C9), privacy and
   re-identification of qualitative data (p. 18), commercial tool licences (p. 20).
 
@@ -241,5 +285,14 @@ Background for the discussion:
 - [Zenodo size limitations](https://support.zenodo.org/help/en-gb/1-upload-deposit/80-what-are-the-size-limitations-of-zenodo), [Zenodo quota increase](https://help.zenodo.org/docs/deposit/manage-files/quota-increase), [Zenodo general policies](https://about.zenodo.org/policies), [Zenodo records help](https://help.zenodo.org/docs/deposit/about-records/)
 - [Chameleon: Using Chameleon for artifact evaluation](https://blog.chameleoncloud.org/posts/using-chameleon-for-artifact-evaluation), [Running artifact evaluations on Chameleon](https://blog.chameleoncloud.org/posts/running-artifact-evaluations-on-chameleon)
 - [Report on Challenges of Practical Reproducibility for Systems and HPC CS (2025)](https://arxiv.org/pdf/2505.01671)
+- [ACM SIGIR artifact badging (quotes ACM v1.1 definitions)](https://sigir.org/general-information/acm-sigir-artifact-badging/), [ESEC/FSE 2021 artifacts track](https://2021.esec-fse.org/track/fse-2021-artifacts)
+- [SPLASH 2026 artifact evaluation](https://2026.splashcon.org/track/splash-2026-artifact-evaluation), [ICSE 2023 artifact example](https://github.com/Generative-Program-Analysis/icse23-artifact-evaluation)
+- [Zenodo principles/preservation](https://about.zenodo.org/principles/), [GitHub–Zenodo integration guide](https://rue-a.github.io/github-zenodo-integration/documentation/), [Lattice QFT open science paper (retention 10–20 years)](https://arxiv.org/pdf/2502.03593)
+- [Anonymous GitHub](https://github.com/tdurieux/anonymous_github), [USENIX SAIS '27 call](https://www.usenix.org/conference/sais27/call-for-papers), [reproducibility study noting expired links](https://arxiv.org/pdf/2608.09567)
+- [Docker Does Not Guarantee Reproducibility (2026)](https://arxiv.org/pdf/2601.12811), [Carpentries: containers and reproducibility](https://carpentries-incubator.github.io/docker-introduction/reproduciblity.html)
+- [Software Heritage SWHID docs](https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html)
+- [Aalto: Horizon Europe open science requirements](https://www.aalto.fi/en/open-science-and-research/eu-horizon-europe-open-science-requirements)
+- [MobiSys 2026 artefact evaluation](https://www.sigmobile.org/mobisys/2026/artifact_evaluation/), [IISWC 2026 AE](https://iiswc.org/iiswc2026/ae.html), [IISWC 2024 AE](https://iiswc.org/iiswc2024/ae.html), [AE for distributed systems study](https://www.researchgate.net/publication/381580238_Artifact_Evaluation_for_Distributed_Systems_Current_Practices_and_Beyond)
+- [OSDI 2020 AE report (SOSP'19 Azure credits)](https://sysartifacts.github.io/osdi2020/report), [SOSP 2023 call for artifacts](https://sysartifacts.github.io/sosp2023/artifacts-call), [SOSP 2023 evaluator guide](https://sysartifacts.github.io/sosp2023/guide)
 - [ATLAS.ti guide: convergent parallel design](https://atlasti.com/guides/the-guide-to-mixed-methods-research/convergent-parallel-design)
 - Week-1 numbers: `Vorl_1/discussion/cross-paper.md`
