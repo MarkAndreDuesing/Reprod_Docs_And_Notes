@@ -43,9 +43,13 @@ header per section or subsection and exhaustive but non-redundant bullets.
    - Implementation Science (p. 6)
    - Descriptive coding, axial coding, thematic analysis (pp. 8–9)
    - Secondary analysis (p. 9)
-3. **§1 Introduction.** My notes on p. 2 say the introduction is "basically just a
-   long-winded reiteration of the abstract". So: *no separate block*. Merge each
-   green point into the later section that covers it in more detail (badging → §2.2
+3. **§1 Introduction.** My note on p. 2: "basically just a long-winded reiteration of
+   the abstract. Merge into bullet-point notes along with the actual full conclusion
+   section". Meaning: merge each green point into the **main section where the topic is
+   discussed**, if that section lies between the start of the paper and §5 Secondary
+   Analysis. Points with no such later section stay as bullets under their own
+   Introduction header. So there is *no duplicate block*: merge each green point into the
+   later section that covers it in more detail (badging → §2.2
    definitions; the four problem areas, communication / social system / time /
    technical, and "AECs are well positioned" → general summary; contributions list →
    method overview). Points mentioned **only** here get their own short "Introduction"
@@ -141,6 +145,10 @@ under the section it belongs to.
 Rules:
 
 - **3 questions** per unit, **5 questions** if the unit contains a **pink** block.
+- **On top of that**, every discussion question from my handwritten notes (types D and
+  D + R in the inventory) is added to its unit. Each is reworded so it **stands on its
+  own** without a reference quote: the needed context goes into the question itself.
+  These do not count towards the 3 or 5.
 - **Units:** §1, §2.1–2.4, §3.1–3.5, §4.1 (RQ1), and **each challenge C1–C12 on its own**
   under §4.2 (RQ2). §4.1 and §4.2 stay strictly separate: RQ1 is about *whether the
   community values artifacts*; RQ2 is about *the challenges*. No RQ1 material goes under a
@@ -251,8 +259,10 @@ From my handwritten notes that ask for facts rather than opinions:
 8. **"meaning?"** → "mixed-methods parallel-convergent design … subsequent integrated
    analysis" (§3.5, p. 10). Plain-language definition, for the Definitions section.
 9. **"Do you think there should be exceptions to AEC like the ACM initiative to account
-   for this?"** (C9, p. 18; industry papers). Do venues have exemptions or industry-track
-   rules for artifact sharing?
+   for this?"** (C9, p. 18; industry papers). Meant: should artifact evaluation allow
+   exceptions for such cases (the ACM's approach is one example)? Look up what the ACM
+   policy allows, e.g. proprietary parts with proxies under "Complete" (p. 5), and whether
+   venues have industry-track exemptions.
 
 ## Annotation inventory
 
@@ -263,7 +273,7 @@ question. "Edge" = bar on the left margin.
 |---|---|---|---|---|
 | 1 | Top of page, general | — | "So the past 2 papers were: why there are so few working artifacts and potential solutions. Now we have: why making good artifacts is hard (+ a bit of overlap)" | I (framing) |
 | 1 | Legend | green / yellow / pink | "summary", "definitions", "potential discussion" | I |
-| 2 | Edge blocks: para 2 (from "for an artifact to be useable…"), "In this paper…", "We find that…" continuing to p. 3 contributions list | green edge | "basically just a long-winded reiteration of the abstract. Merge into bullet-point notes along with the actual full [content] section" (the last word is hard to read; possibly "conclusion") | I |
+| 2 | Edge blocks: para 2 (from "for an artifact to be useable…"), "In this paper…", "We find that…" continuing to p. 3 contributions list | green edge | "basically just a long-winded reiteration of the abstract. Merge into bullet-point notes along with the actual full conclusion section" (meant: merge into the main section where the topic is discussed, if it comes up before §5; otherwise keep under an Introduction header) | I |
 | 2 | Para 1–2 | yellow words/edge | Artifacts, tools, benchmarks, datasets | definitions |
 | 4 | "AEC" in §2.2 | — | "Artifact Evaluation Committee" | I (definition) |
 | 4 | ACM artifact definition; Documented/Consistent | yellow edge | — | definitions |
@@ -293,7 +303,7 @@ question. "Edge" = bar on the left margin.
 | 16 | C4 "tacit knowledge… highly automated way" | pink edge | "implicit human problem. What are ways to tackle this?" | D |
 | 17 | C7 hosting paragraph (arrow loops round to "not intended as a long-term archive") | green | "Isn't this a solved problem with Zenodo?" | R |
 | 17 | "share a large dataset that does not fit into a GitHub repo or Dropbox" | pink edge | "What would you do if your artifact was a few terabytes large?" | R + D |
-| 17–18 | P22 "once criticised for not sharing data for an industry track paper… ritualistic blanket argument" | pink | "Do you think there should be exceptions to AEC like the ACM initiative to account for this?" | D (+R) |
+| 17–18 | P22 "once criticised for not sharing data for an industry track paper… ritualistic blanket argument" | pink | "Do you think there should be exceptions to AEC like the ACM initiative to account for this?" (meant: should there be exceptions to artifact evaluation for such cases, with the ACM's approach as an example) | D (+R) |
 | 19 | Table 5 | pink edge, green counts | — | D |
 | 20 | C9 users: licensing, decompiler, paid licences | pink edge | "How open source should research be? How feasible is this?" | D |
 | 20 | Fig. 3 | pink edge | "compare with those from Vorl 1 papers" | R |
@@ -308,7 +318,7 @@ question. "Edge" = bar on the left margin.
 | 23 | Shepherding / AE as precondition / rubber stamping passage | pink edge | "what is the point of review if you're just rubber stamping anyway?" | D |
 | 23 | C9 reviewers: licences, proprietary components | pink edge | "→ how does the ACM badge system rule on this?" / "once again, whose responsibility is this, should financial investment be expected from reviewers? or is automatic badge rejection fair for using inaccessible tools/libraries?" | R + D |
 | 23 | C10 "just make students do AEC… not a primary thing" | pink edge | — | D |
-| 23 | Between C10 and C11 | — | "should be provided? → what about using remote servers and containerisation to avoid the compute, disk space and consistency issues? Realistic?" | R + D |
+| 23 | C11 heading (between C10 and C11) | — | "should be provided? → what about using remote servers and containerisation to avoid the compute, disk space and consistency issues? Realistic?" | R + D |
 | 23 | C11 "more time than one can devote… (~ one day)" | pink edge | "Is it fair to have a flat time cutoff for rejection?" | D |
 | 23 | After P52 large VM / slow downloads | — | "very amateurish, what if the artifact exceeds the disk space of a conventional PC? → unreviewable with this approach" | D + R |
 | 23–24 | "practically infeasible to replicate… cloud-based, fuzzers, program repair" | pink edge | "damaging to the scientific process if we can't reproduce!" | D |
