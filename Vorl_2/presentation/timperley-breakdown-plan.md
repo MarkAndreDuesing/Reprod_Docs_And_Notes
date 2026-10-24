@@ -20,7 +20,8 @@ _Page numbers are the paper's "Page x of 41" = PDF pages._
 
 ## Output document structure
 
-Target file: `Vorl_2/presentation/timperley-summary.md`. Keep the paper's order, with one
+Target file: `Vorl_2/presentation/timperley-summary.md` (summary only; the discussion
+questions go in a separate file, see below). Keep the paper's order, with one
 header per section or subsection and exhaustive but non-redundant bullets.
 
 1. **General summary** (from the Abstract, green). Problem, goal, method (publication
@@ -82,7 +83,8 @@ header per section or subsection and exhaustive but non-redundant bullets.
    Close with the "Insights for RQ1" box. My note on p. 13 calls it a *"good
    repetition/summary"*, so use it as the section's summary line rather than repeating
    the bullets.
-6. **§4.2 RQ2, merged by challenge C1–C12** (see the format decision below).
+6. **§4.2 RQ2, merged by challenge C1–C12** (see the format decision below). Kept
+   strictly apart from §4.1 RQ1: nothing from the RQ1 results is repeated here.
 
 ## Format decision for §4.2 (from my open question)
 
@@ -132,33 +134,94 @@ even when possible; some reviewers are happy with the current process.
 
 ## Next step after the summary: discussion questions
 
-Rules from my plan notes:
+Target file: `Vorl_2/presentation/timperley-discussion-questions.md`, **separate from the
+summary file**, with the same headers as the summary so each block of questions sits
+under the section it belongs to.
 
-- **3 questions** per section/subsection (§1, 2.1–2.4, 3.1–3.5, 4.1, and each challenge
-  C1–C12 under §4.2).
-- **5 questions** for each unit that contains a **pink** block. From the annotations these
-  are: §2.2 (ACM "too early for specific guidelines" quote, p. 5), §3.1 (artifact count
-  and availability by URL, p. 7), §3.2 qualitative analysis (thematic analysis doesn't show
-  prevalence, p. 9), §3.4 (IS criteria and trialability, p. 9), §3.5 (heading pink; data
-  sharing vs. confidentiality; artifacts not documented in paper; internal validity;
-  available = link alive; external validity, pp. 10–11), §4.1 (62.69 %, p. 11), C1
-  (risks; untapped publication value, p. 13), C2 (VMs, p. 21 / p. 22), C3 (p. 16), C4
-  (creators p. 16; reviewers' automation passage p. 22), C6 (purpose of review and
-  shepherding, pp. 22–23), C7 (large datasets, p. 17; Fig. 3, p. 20), C9 (P22 "ritualistic
-  blanket argument", pp. 17–18; licensing for users, p. 20; licences for reviewers, p. 23),
-  C10 (p. 23), C11 (pp. 23–24), C12 (p. 24), Table 5 (p. 19).
-  - So most of §4.2 gets 5 questions; only C5 and C8 get 3.
-- Build on my handwritten comments (inventory below, types D and R).
+Rules:
+
+- **3 questions** per unit, **5 questions** if the unit contains a **pink** block.
+- **Units:** §1, §2.1–2.4, §3.1–3.5, §4.1 (RQ1), and **each challenge C1–C12 on its own**
+  under §4.2 (RQ2). §4.1 and §4.2 stay strictly separate: RQ1 is about *whether the
+  community values artifacts*; RQ2 is about *the challenges*. No RQ1 material goes under a
+  challenge and vice versa.
+- Questions build mainly on the **exact pink-marked lines** (list below) and on my
+  handwritten comments (inventory, types D and R).
 - **Research first** for notes that are really open questions (type R), then turn the
   answers into background facts and follow-up questions.
-- For §1–§4, keep the paper's own recommendations (§6, R1–R8) in mind: a good question
-  can ask whether the matching recommendation would actually fix the challenge, e.g.
-  C7 ↔ R3 (Zenodo/Software Heritage), C10 ↔ R6/R7, C11 ↔ R6/R7 (compute credits), C12 ↔
-  R6 (two-way anonymous communication), C6 ↔ R4/R5 (rubric, published criteria), C1 ↔ R7
-  (hiring/promotion credit), C3 ↔ R3 (maintenance and transition plans), C2 ↔ R2 (CI,
-  containers).
+- Keep the paper's own **recommendations** in mind (§6, called Rec 1–Rec 8 here so
+  they aren't confused with RQ1/RQ2). A good question can ask whether the matching
+  recommendation would actually fix a challenge: C1 ↔ Rec 7 (hiring/promotion credit),
+  C2 ↔ Rec 2 (CI, containers), C3 ↔ Rec 3 (maintenance and transition plans), C6 ↔
+  Rec 4/Rec 5 (rubric, published criteria), C7 ↔ Rec 3 (Zenodo/Software Heritage), C10 ↔
+  Rec 6/Rec 7, C11 ↔ Rec 6/Rec 7 (compute credits), C12 ↔ Rec 6 (two-way anonymous
+  communication).
 - Same quality test as in `moderation.md`: each question needs a hook in the text and two
   defensible opposing answers.
+
+### Exact pink-marked lines per unit
+
+Line ranges were measured from the annotation layer: the lines next to each pink edge
+bar, or under an inline pink highlight. Quotes are shortened to the start and end of the
+marked lines.
+
+**§2 Background → 5 questions for §2.2; 3 for §2.1, §2.3, §2.4**
+- §2.2, p. 5 (3 lines): ACM: "We believe that it is still too early to establish more
+  specific guidelines for artifact and replicability review… sufficient diversity among
+  the various communities… may not be desirable at all."
+
+**§3 Methodology → 5 questions for §3.1, §3.2, §3.4, §3.5; 3 for §1 and §3.3**
+- §3.1, p. 7 (3 lines): "we identified 899 artifacts across 1434 papers. Finally, we
+  determined the availability of each artifact by manually checking that its associated
+  URL could be accessed at the time of inspection (Jan 29th – Feb 6th, 2019)."
+- §3.2, p. 9 (3 lines): "A thematic analysis does not tell us how prevalent each of the
+  experiences… might be, only that they are present in the social context."
+- §3.4, p. 9 (inline, 1½ lines): "ensure that it does not exacerbate any known
+  challenges, is compatible with existing practices, and is likely to be scalable,
+  sustainable, trialable, and observable."
+- §3.4, p. 9 (3 lines): "Each of these recommendations can be implemented, trialed,
+  observed, and evaluated to determine whether it has achieved its intended outcome."
+- §3.5, p. 10: the **heading "3.5 Threats to Validity"** itself is marked pink, so the
+  whole section is a discussion area. Plus:
+  - replicability (inline, 2 lines): "as much of our materials available as possible,
+    while still preserving the confidentiality of the survey respondents"
+  - construct (3 lines): "papers could have artifacts that are not documented in the
+    paper, which could potentially be found only by searching, or contacting the authors
+    of the paper. We did not contact authors for practical reasons…"
+  - internal (2 lines): "Did we skew the accuracy of our results with how we collected
+    and analyzed information? Surveys can be affected by intentional and unintentional
+    bias…"
+  - p. 11 (4 lines): "we define an artifact as being available if the link is still
+    alive… completely unusable, or… links to a download that is no longer available…
+    evaluating the quality of artifacts is beyond the scope of this work"
+  - external, p. 11 (2 lines): "Because of the nature of surveys, we cannot generalize
+    our results beyond our survey population. Perhaps if we had chosen a different…"
+
+**§4.1 RQ1 → 5 questions**
+- p. 11 (3 lines): "almost two thirds (62.69 %) of papers published at ASE, EMSE, FSE,
+  and ICSE between 2014 and 2018 (inclusive) contain an artifact. Furthermore, across
+  all venues… the proportion…"
+
+**§4.2 RQ2, per challenge**
+
+| C | Questions | Pink-marked lines (page, length) |
+|---|---|---|
+| C1 Not worth it | 5 | p. 13 (4 lines): "risks that outweigh the potential rewards… poor code quality may harm their reputation, a fear of being 'scooped', a fear of mistakes in the analysis being discovered, the burden of maintaining the artifact, and the possibility that the artifact may be used by no one." · p. 13 (3 lines): "reluctant to share artifacts that still have some untapped publication value, or may wish to avoid being 'scooped'… 'sometimes, one needs to protect a Ph.D. students abilities to…'" |
+| C2 Portability | 5 | p. 21 (3 lines, reviewers): "VMs can be used to mitigate these portability challenges and to avoid the security risks of executing untrusted code… However, VMs are not without their own problems." · p. 22 (9 lines, reviewers): from "running across different OSes leads to problems and sizes are huge" through P64 "not really possible to accurately assess performance, nor should the authors be penalised…" and "containers… to address performance and size concerns" to P18 "Something that compiles today is probably not to compile in five years… having containers does not always solve this problem." |
+| C3 Maintenance | 5 | p. 16 (4 lines, creators): "Sharing an artifact not only requires an upfront investment… but also an ongoing investment to continually maintain the artifact. As bugs are uncovered, use cases evolve, and inevitable bit rot occurs, there is a need to update the artifact." |
+| C4 Tacit knowledge | 5 | p. 16 (3 lines, creators): "tacit knowledge remains a major obstacle to artifact creators… 'the main difficulty is to provide a highly automated way to utilize the artifact. A lot of knowledge is typically buried in developers' heads.'" · p. 22 (10 lines, reviewers): "Some reviewers suggest that automation… may be used to mitigate the tacit knowledge problem. However… not a panacea" → P74 "difficult to know whether the submitted device is faulty, or if [you don't know how to] use it" → script as "a blackbox… no insight into whether the process… is sound" → P25 "likely to replicate the same mistake (if any) the original authors made." |
+| C5 Doesn't fit purpose | 3 | none |
+| C6 Standards and guidelines | 5 | p. 22 (4 lines, reviewers): "The purpose of the artifact review process itself is often unclear… running a set of automated scripts to replicate a result, or… a more thorough investigation of the assumptions, limitations, and generality of the artifact." · p. 23 (3 lines): end of P6 quote, "deep-dive into the code and occasionally uncover severe problems… extremely time-intensive… multiple days of work. But if the AEC doesn't do it, will anybody ever? Probably not." · p. 23 (8 lines): from "[an improperly] implemented benchmark should be grounds for paper rejection" through P11 (evaluate as part of paper), P124 / P146 (artifacts mandatory) to P143 "rubber stamping… less [of] a burden to get an artifact 'stamp'. Often, many papers…" |
+| C7 Hosting | 5 | p. 17 (4 lines, creators): P12 "share a large dataset that does not fit into a GitHub repo or Dropbox… Google Drive, GitHub, and Dropbox… not intended as a long-term archive, and are ill-suited to large datasets." · p. 20 (Fig. 3 caption, users): availability over time, checked once in Jan/Feb 2019 |
+| C8 Double-blind | 3 | none |
+| C9 External constraints | 5 | pp. 17–18 (inline, creators): P22 "once criticised for not sharing data for an industry track paper coauthored with practitioners. Artifact should not be used as ritualistic blanket argument to judge papers." · p. 20 (6 lines, users): whole C9 user paragraph: licensing, P35 decompiler and no replication package, P9 paid commercial licence for auxiliary tools · p. 23 (4 lines, reviewers): "reviewers may not possess the necessary licenses… P65 'no obvious pathway… proprietary component (Windows, a commercial IDE). Some legal clarity…'" |
+| C10 Reviewer incentives | 5 | p. 23 (4 lines): "gets students involved in the reviewing process. But it also reinforces the idea that artifacts are not a primary thing… may lead to inconsistent and low-quality reviews due to reviewers that are not fully invested." |
+| C11 Technical obstacles | 5 | p. 23 (5 lines): from the C11 heading, "long execution times and a lack of adequate compute resources… P50 'what to do for artifacts that by nature take more time than one can devote to evaluating a single artifact (~ one day)'… significant disk space, such as virtual machine…" · pp. 23–24 (5 lines): "practically infeasible to replicate an experiment via an artifact… P64 'reviewers do not often have the capabilities to actually run the artifact… cloud-based contributions, fuzzers, automated program repair, require significant hardware…'" |
+| C12 Limited communication | 5 | p. 24 (5 lines): "takes a considerable amount of time to build an artifact and a minor glitch in the installation instructions should not be grounds for rejection… P133 'understandable that an artifact from a researcher is not perfect. An important thing is that the owners of the artifact are willing to help the users resolve outstanding issues'" |
+
+Also marked pink, attached to the challenges it lists: **Table 5** (p. 19, whole table,
+users). Questions about it go under C4 (instructions, 103 and 79), C7 (no longer
+accessible, 81) and C2/C5 (build, run, modify, reimplement), not as a separate unit.
 
 ## Open research questions (to look up before writing questions)
 
