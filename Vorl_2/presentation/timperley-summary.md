@@ -58,20 +58,38 @@ solutions. This paper asks *why making good artifacts is hard*, with some overla
   - Evaluation is optional and opt-in after paper acceptance; a paper can't be rejected
     because of its artifact.
 - **ACM badges (§2.2, p. 4):**
-  - three badges: **Artifacts Available**, **Artifacts Evaluated**, **Results Validated**
-  - FSE and ICSE participate since July 2020
-  - badges appear on the paper's front page and in the ACM Digital Library metadata
-  - after acceptance, a paper may receive **Evaluated: Functional** or **Evaluated:
-    Reusable**, depending on quality and potential for reuse
-  - introduced at several SE venues as an *optional* formal review process. It lets the
-    claims of artifacts be assessed, uncovers usability issues others might run into, and
-    signals artifact quality to the community. Its implementation has met both praise and
-    criticism (§1, p. 2).
+  - The paper names three badges: **Artifacts Available**, **Artifacts Evaluated**
+    (Functional or Reusable, depending on quality and potential for reuse) and **Results
+    Validated**.
+  - FSE and ICSE participate since July 2020. Badges appear on the paper's front page and in
+    the ACM Digital Library metadata.
+  - Introduced at several SE venues as an *optional* formal review. It assesses artifact
+    claims, uncovers usability issues and signals quality to the community; its
+    implementation has met both praise and criticism (§1, p. 2).
+  - _Added from research (ACM policy v1.1, 2020; lecture slide 9):_ "Results Validated" is
+    split into two badges. The badges are independent, so a paper can get any combination,
+    but only one Evaluated level:
+
+    | Lecture slide 9 asks | Badge | What is required |
+    |---|---|---|
+    | Does the artifact work? | **Evaluated – Functional** | • documented, consistent, complete, exercisable (criteria below)<br>• evidence of verification and validation |
+    | | **Evaluated – Reusable** | • everything for Functional<br>• quality well beyond minimal functionality<br>• documented and structured for reuse and repurposing |
+    | Is it permanently available? | **Available** | • on a public **archival** repository (e.g. Zenodo, Figshare, Software Heritage) with a DOI or persistent link<br>• personal pages or GitHub alone not enough<br>• no evaluation needed |
+    | Can the results be confirmed? | **Results Reproduced** | • main results obtained by a different team<br>• **using** the authors' artifacts (at least in part) |
+    | | **Results Replicated** | • main results obtained by a different team<br>• **without** the authors' artifacts |
+
+  - _Added from research:_ ACM only defines the badges and criteria. Each conference's AEC
+    sets the concrete rules and process. ICSE 2026, for example: a 30-minute installation
+    limit, a set README structure, and a list of accepted archives. Hence the unclear
+    standards in C6. In 2020, ACM swapped the meanings of "Reproduced" and "Replicated" to
+    match the NISO standard (RP-31-2021).
 - **ACM artifact quality criteria (pp. 4–5):** quality = the extent to which an artifact is:
   - **Documented:** at minimum an inventory of the artifacts and enough description to
     exercise them.
   - **Consistent:** relevant to the paper and contributes to generating its main results.
   - **Complete:** all components relevant to the paper are included, as far as possible.
+    _Added from research:_ proprietary parts may be left out if documented with how to
+    obtain them, with proxy data included to demonstrate the analysis.
   - **Exercisable:** the scripts/software that generate the results can be executed
     successfully, and the included data can be accessed and manipulated.
 - **Diffusion of Innovations, DoI (§2.3, pp. 5–6):** a social-science framework that
@@ -403,11 +421,21 @@ Perspectives: ■ creator, ▲ user, ★ reviewer. Points raised by only one gro
 - **[user]** In the publication survey, **~14 % of artifacts were inaccessible** via the URL
   in the paper. Older artifacts are more often unavailable (26.47 % for 2014), but even
   recent ones are affected (5.43 % for 2018) (Fig. 3, p. 20).
+- _Added from research:_ Zenodo covers most cases:
+  - free, with a DOI per upload, 50 GB per record (up to 200 GB on request)
+  - GitHub releases can be archived to it automatically
+  - records are kept "for the lifetime of the repository", tied to CERN
+
+  It doesn't cover larger data or living versions. ICSE now requires an archival
+  repository for the Available badge.
 
 ### C8 Double-blind review ■
 - **[creator]** Double-blind review adds two difficulties (p. 17):
   - artifacts must be **anonymised** so that they don't reveal the authors
   - it is harder to find a host that allows **anonymous** sharing
+- _Added from research:_ Anonymous GitHub (anonymous.4open.science) mirrors a repository
+  with identifying names replaced, but its links expire after review, so it doesn't
+  replace an archive.
 
 ### C9 External constraints ■ ▲ ★
 - **[creator]** Some reasons are beyond the creator's control (p. 17):
@@ -445,6 +473,10 @@ Perspectives: ■ creator, ▲ user, ★ reviewer. Points raised by only one gro
 - Some experiments are **practically infeasible to replicate** with an artifact, because
   reviewers can't run them: cloud-based work, fuzzers and automated program repair need
   significant hardware (pp. 23–24).
+- _Added from research:_ Some venues let reviewers and authors agree on a reduced but
+  representative set of experiments (MobiSys 2026), or have authors provide remote access
+  to capable hardware (IISWC 2026). Systems venues also use shared testbeds (Chameleon,
+  CloudLab). I found no SE venue that provides reviewers with compute.
 
 ### C12 Limited communication ★
 - Reviewing challenges are made worse by the **lack of an open communication channel**
