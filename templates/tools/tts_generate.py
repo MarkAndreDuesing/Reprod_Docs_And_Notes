@@ -31,6 +31,9 @@ from pathlib import Path
 from piper import PiperVoice, SynthesisConfig
 
 RATE = 22050
+# The user's preferred listening pace is 0.9x Piper's normal rate (decided in
+# round 3), so --speed 1.0 means that pace. Change here if the preference changes.
+BASE_PACE = 0.9
 SENTENCE_GAP = 0.35   # seconds between sentences
 PARAGRAPH_GAP = 0.8   # seconds between paragraphs
 
@@ -101,7 +104,7 @@ def main():
     ap.add_argument("--voices", help="CSV with columns no,model,speaker (voice test)")
     ap.add_argument("--models", default="/tmp/piper-voices")
     ap.add_argument("--speed", type=float, default=1.0,
-                    help="overall speed, any value, e.g. 1.08 = 8 %% faster, 0.95 = 5 %% slower")
+                    help="overall speed relative to the preferred pace (BASE_PACE), e.g. 1.08 = 8 %% faster")
     ap.add_argument("--album", default="")
     ap.add_argument("--bitrate", default="48k")
     a = ap.parse_args()
@@ -167,7 +170,7 @@ def main():
                 v = vlist[vi]
                 segments[-1]["chars"] += len(text)
                 # per-voice calibration (voices.csv column length_scale) evens out speaking rates
-                ls = float(v.get("length_scale") or 1.0) / a.speed
+                ls = float(v.get("length_scale") or 1.0) / (a.speed * BASE_PACE)
                 pcm += synth(voices, v["model"], v.get("speaker", ""), text, ls, tmp)
                 pcm += silence(PARAGRAPH_GAP if para_end else SENTENCE_GAP)
             segments[-1]["end"] = len(pcm) / 2 / RATE
