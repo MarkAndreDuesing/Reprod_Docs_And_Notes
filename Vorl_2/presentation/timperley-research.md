@@ -270,6 +270,167 @@ Background for the discussion:
 
 ---
 
+## Part 2: Research for refining the discussion questions
+
+Gathered for the second round of question selection (slides 26–28 of the team deck). Each
+item gives facts students can build on without background research of their own.
+
+### 9. Real cases where errors were found because code or data was available (C1: "fear of mistakes being found")
+
+- **Chang, 2006 (structural biology):** a home-made analysis program, inherited from a
+  neighbouring lab, flipped two data columns. This inverted the protein structures and led
+  to **five retractions**, three of them highly cited *Science* papers spanning five years.
+  The error was found when another group's results contradicted the structure.
+- **Willoughby–Hoye NMR scripts, 2019 (chemistry):** Python's `glob` returns files in an
+  OS-dependent order. The scripts gave correct values on Windows and older macOS but wrong
+  ones on newer macOS and Ubuntu, potentially affecting ~150 studies. Found because
+  researchers ran the shared scripts on a different OS. The fix was one line (sort the file
+  list).
+- **Reinhart & Rogoff, 2013 (economics):** a graduate student (Herndon) asked for the
+  original spreadsheet after failing to replicate an influential austerity paper. A range
+  error left out five countries; corrected, the headline growth figure changed from −0.1 %
+  to 2.2 %.
+- **Fraud found in artifact evaluation:** an AEC member found outputs hard-coded in the
+  source; the paper was withdrawn (Hermann et al. 2020, p. 477, this week's other paper).
+- **Use:** these show both sides of C1. The fear is real, since errors do get found and
+  can be costly, but finding them is the point of sharing, and honest bugs were treated as
+  mistakes, not misconduct.
+
+### 10. Scooping and embargoes (C1: "untapped publication value", "protect a PhD student")
+
+- Embargoes are an established compromise in data-heavy fields:
+  - telescope data typically has a 12–18-month exclusive period for the observing team
+  - NERC (UK) treats up to 2 years after data collection as reasonable
+  - OSF allows embargoing preregistrations for up to 4 years
+- I found **no measurement of how often scooping actually happens**. Sources describe it as
+  a "powerful disincentive", i.e. a perceived risk.
+- Week-1 tie-in: Collberg & Proebsting listed "competitors' advantage" among the reasons not
+  to share.
+
+### 11. Performance claims, VMs and containers (C2)
+
+- **Overhead:** IBM's Felter et al. (2014) found containers matched or beat KVM virtual
+  machines in almost all cases, with negligible CPU and memory overhead versus bare metal.
+  Both need tuning for I/O-heavy workloads. Containers *inside* a VM inherit the VM's
+  overhead. A later independent study agrees: bare metal fastest, containers close behind,
+  VMs last.
+- **How venues handle it:** SPLASH 2026 tells authors to explain how reviewers on other
+  hardware can recognise that the *high-level* results still hold (trends, one tool beating
+  another), since exact numbers depend on the hardware. Individual artifacts state "expect
+  different absolute numbers, check ratios and speedups". See item 5.
+- **Build rot vs. image:** rebuilding from an unpinned Dockerfile can silently produce a
+  different image. Archiving the built image plus a pinned Dockerfile is the recommended
+  fix. See item 5.
+
+### 12. How long should an artifact work, and who looks after it? (C3)
+
+- **Retention rules:** the DFG Code of Conduct (Germany) expects research data, *and the
+  software* underlying a publication, to be archived for **at least ten years**, typically
+  implemented in university statutes (e.g. Potsdam, Jena, Max Planck). Archiving ≠ keeping
+  it runnable.
+- **Funding for maintenance exists, but is short-term:**
+  - Chan Zuckerberg Initiative's Essential Open Source Software for Science: up to
+    $200k/year for 2 years, for widely used tools
+  - DFG "Research Software Sustainability" calls
+  - NSF CSSI "transition to sustainability"
+  - an overview notes funding follows short cycles, not long-term maintenance needs
+- **After the author leaves:** Research Software Engineers (RSEs) are permanent staff who
+  keep codebases alive inside an institution. Princeton and Aalto run RSE teams, Aalto partly
+  after a departed student's code stalled a project. A Research Software Succession Planning
+  task force (Oct 2025) is building a handover checklist; a 2025 paper gives "10 quick tips
+  for making your software outlive your job".
+- **Week-1 tie-in (`Vorl_1/seminar-notes.md`):** last week concluded that good archiving
+  needs constant, costly maintenance and further funding, that formats will change (Docker
+  may not exist in 40 years), and that source code may be the most stable format.
+
+### 13. One-click reproduction scripts (C4)
+
+- "Push-button replication" is an established term (3ie, development economics): first
+  check that the authors' data and code reproduce the published numbers, then do a
+  "pure replication" by writing new code. In one audit, only 14 of 69 articles with
+  archived data could be reproduced at all.
+- I found no study measuring whether scripts hide errors. The argument comes from the
+  paper's reviewers (P25: AECs "likely to replicate the same mistake"; P52: "easy to
+  reproduce, difficult to understand where to add case studies"). The NMR `glob` case
+  (item 9) is a concrete example: a script that "works" can still be wrong on another
+  machine.
+
+### 14. Industry data and unshareable artifacts (C9)
+
+- **ICSE open science policy:** sharing data is *not* mandatory for submission or
+  acceptance; authors who can't share should say why in a data availability statement.
+  ICSE 2027's Q&A on industry research says the same, stated in both the submission form
+  and the paper.
+- **Artifact evaluation:** artifacts can get the *Evaluated* badges with private access for
+  reviewers only; *Available* requires public archival access. Proxy data for proprietary
+  data and anonymised qualitative data are accepted (ICSE 2026/2027).
+- So the formal rules already allow exceptions. P22's complaint is about paper reviewers'
+  attitudes, which no policy controls.
+
+### 15. Proprietary tools and licences (C9)
+
+- No blanket rule. Formal-methods venues handle it case by case:
+  - **CAV:** authors who can't provide a VM with licensed software (e.g. MATLAB) contact the
+    chairs to arrange an alternative
+  - **FORMATS 2022:** accepted a shared MATLAB Drive folder runnable in MATLAB Online
+  - **QEST 2022/2023:** explicit exemption process for restrictively licensed software
+- Reviewers have reported trouble getting access to proprietary operating systems (ROSE
+  guidance). Reviewers aren't expected to buy licences.
+
+### 16. Running untrusted artifacts (C2: security)
+
+- POPL recommends VM images partly because they "protect reviewers from malfunctioning
+  artifacts damaging their computer"; ACSAC recommends Docker or VirtualBox.
+- A 2026 paper ("Beyond Reproducibility") proposes a security checklist for artifacts and
+  asks reviewers to do basic security checks. I found no guidance specifically on refusing
+  root access.
+
+### 17. Who reviews, and how much time they get (C10, C11)
+
+- **Students on purpose:** from ECOOP 2013 and OOPSLA 2013, AECs were deliberately filled
+  with **senior PhD students**, for two stated reasons: they know current tools, and it
+  gets the next generation thinking about artifacts (organisers' calls; Krishnamurthi's
+  memo).
+- **Time budget per artifact:** SOSP 2021 estimated **10–20 hours**, with 2–4 artifacts per
+  member; APLAS 2022 about **8 hours**, with 3–4 per member. ICSE 2026: setup over 30
+  minutes makes acceptance unlikely. So the 30 minutes is a *setup* limit within an
+  evaluation of several hours.
+
+### 18. Communication during review (C12)
+
+- "Kick the tires" is an early check that the artifact runs at all, followed by a short
+  author response window (SLE 2025: 5 days; OOPSLA 2021: about a week), with further rounds
+  allowed at some venues (OOPSLA 2021, Programming journal). ICSE 2026 runs an iterative
+  cycle with a 72-hour response time.
+- So most venues are already iterative. The open question is how much author help is
+  acceptable before a badge stops meaning "works for a stranger".
+
+### 19. Link rot and re-checking (C7)
+
+- Klein et al. (2014): across 3.5 million articles (1997–2012), **13–22 %** of web
+  references suffered link rot ("one in five articles"), more with content drift.
+- Timperley's 26 % dead for 2014 vs. 5 % for 2018 fits this general decay pattern.
+
+### 20. Current state: newer numbers (for "then vs. now")
+
+- A 2024 study of ASE, FSE, ICSE and ISSTA papers (2017–2022) found the share of papers with
+  artifacts rose from **60.1 % to 81.1 %**. It also looked at maintenance, popularity and
+  quality.
+
+### 21. Rewards for artifact work (non-RQ2 idea: "which reward would motivate you?")
+
+- **JOSS (Journal of Open Source Software):** short, citable papers about research software
+  with a DOI, reviewed openly on GitHub (code, docs, tests, licence). Built explicitly
+  because citations and papers are what count for hiring and promotion. Other options
+  students may know: artifact awards, badges, citations of the artifact's DOI.
+
+### 22. Qualitative data sharing (C9: re-identification)
+
+- Repositories such as the Qualitative Data Repository offer de-identification plus
+  **access controls** (approved researchers only, data use agreements). Consent forms must
+  say up front who may see the data. Risk is highest in small communities, e.g. a single
+  company's developers.
+
 ## Sources
 
 - Lecture slides: `Vorl_1/IntroductoryLecture.pdf`, slides 3, 6–11/24
@@ -296,3 +457,21 @@ Background for the discussion:
 - [OSDI 2020 AE report (SOSP'19 Azure credits)](https://sysartifacts.github.io/osdi2020/report), [SOSP 2023 call for artifacts](https://sysartifacts.github.io/sosp2023/artifacts-call), [SOSP 2023 evaluator guide](https://sysartifacts.github.io/sosp2023/guide)
 - [ATLAS.ti guide: convergent parallel design](https://atlasti.com/guides/the-guide-to-mixed-methods-research/convergent-parallel-design)
 - Week-1 numbers: `Vorl_1/discussion/cross-paper.md`
+- [Retraction Watch-style coverage of the Chang retractions (The Scientist)](https://www.the-scientist.com/retractions-unsettle-structural-bio-46891), [A Scientist's Nightmare summary](https://acawiki.org/A_Scientist%27s_Nightmare:_Software_Problem_Leads_to_Five_Retractions)
+- [The Register: Python glob bug in NMR scripts](https://www.theregister.com/2019/10/15/bug_python_scripts/), [ACM TechNews](https://cacmb4.acm.org/news/240221-bug-in-python-script-may-have-affected-hundreds-of-studies)
+- [Monkey Cage: Reinhart & Rogoff](https://themonkeycage.org/2013/04/what-the-reinhart-rogoff-debacle-really-shows-verifying-empirical-results-needs-to-be-routine/), [Reinhart & Rogoff response](https://scholar.harvard.edu/sites/scholar.harvard.edu/files/rogoff/files/reinhart_rogoff_responding_to_our_critics.pdf)
+- [EIDC embargo FAQ (NERC)](https://eidc.ac.uk/help/faq/embargos), [OSF on fear of scooping](https://help.osf.io/article/634-addressing-fear-of-scooping-on-osf-preregistrations), [Biosignatures workshop report](https://arxiv.org/pdf/2210.14293)
+- [Felter et al. 2014, containers vs. VMs](https://people.computing.clemson.edu/~jmarty/projects/lowLatencyNetworking/papers/NFVandContainers/AnupdatedPerfAnalysisofContainersandVMs.pdf), [IJEECS Docker/VM/bare-metal study](https://www.doi.org/10.11591/IJEECS.V7.I1.PP205-213)
+- [Uni Potsdam research data policy (DFG 10 years)](https://www.uni-potsdam.de/en/forschungsdaten/policies/university/policy), [MPG rules of conduct](https://rdm.mpdl.mpg.de/2022/12/12/rules-of-conduct-for-good-scientific-practice-by-the-mpg/), [DFG research software principles](https://www.dfg.de/en/basics-topics/digital-topics/research-software/principles)
+- [CZI EOSS](https://chanzuckerberg.com/eoss/proposals/), [Research software funding landscape](https://www.researchsoft.org/blog/2022-02-24/)
+- [Princeton: what's an RSE](https://picscie.princeton.edu/news/2018/%E2%80%9Cwhat%E2%80%99s-rse%E2%80%9D), [Aalto RSE](https://hackmd.io/@AaltoSciComp/r1N03G8FO), [Succession planning task force](https://www.researchsoft.org/tf-succession-planning), [10 quick tips for software to outlive your job](https://arxiv.org/abs/2505.06484v1)
+- [Push-button replication (3ie)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6303036/)
+- [ICSE 2027 artifact evaluation](https://conf.researchr.org/track/icse-2027/icse-2027-artifact-evaluation), [ICSE 2023 technical track (open science policy)](https://conf.researchr.org/track/icse-2023/icse-2023-technical-track)
+- [CAV 2025 artifact evaluation](https://conferences.i-cav.org/2025/artifact/), [FORMATS 2022 AE](https://ce.ncl.ac.uk/formats2022/artifactevaluation), [QEST 2023 artifacts](https://www.qest.org/qest2023/artifacts.html), [ROSE guidance](https://github.com/researchart/rose/blob/master/guidance.md)
+- [POPL 2023 AE](https://popl23.sigplan.org/track/POPL-2023-artifact-evaluation), [ACSAC artifacts](https://acsac.org/2020/submissions/papers/artifacts), [Beyond Reproducibility (2026)](https://arxiv.org/pdf/2605.06508)
+- [OOPSLA 2013 AEC nomination letter](https://evaluate.inf.usi.ch/artifacts/aea/announcements/nomination1.html), [Krishnamurthi: AE memo](https://cs.brown.edu/~sk/Memos/Conference-Artifact-Evaluation/), [SOSP 2021 AEC call](https://www.sigops.org/2021/sosp-2021-aec-call/), [APLAS 2022 AEC call](https://mailman.haskell.org/archives/list/haskell-cafe@haskell.org/thread/R5FS4TTAMQ44EI2D36636SQT7OAGNOOU)
+- [SLE 2025 AE](https://www.sleconf.org/2025/ArtifactEvaluation.html), [OOPSLA 2021 artifacts](https://2021.splashcon.org/track/splash-2021-Artifacts), [Programming journal AE](https://programming-journal.org/artifact-evaluation)
+- [Klein et al. 2014, reference rot](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4277367/)
+- [Research Artifacts in SE Publications: Status and Trends (2024)](https://arxiv.org/abs/2404.06852)
+- [JOSS design and first-year review](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7340488/)
+- [QDR practice paper (CODATA)](https://datascience.codata.org/articles/674), [PRIMR: qualitative data sharing and IRBs](https://blog.primr.org/at-the-dawn-of-qualitative-data-sharing-questions-irbs-may-want-to-ask-during-protocol-review)
