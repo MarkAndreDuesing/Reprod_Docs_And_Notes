@@ -59,14 +59,14 @@ Core questions come from my selected (green) questions, lightly reworded and anc
 **My notes:**
 - POPL recommends VM images partly to protect reviewers' machines.
 
-### 4. C3 Maintenance: Software decay
+### 4. C3 Maintenance: Decay and maintenance
 
 **Context:** Artifacts decay as dependencies age and student maintainers leave.
 
 **Question:** Is software decay unavoidable, and what practical ways are there to limit it?
 
 **Follow-ups:**
-- Example: archived images, pinned dependencies, plain source code
+- Example: a 2015 thesis tool needs Python 2 and a library that no longer exists: fix it, freeze it in an image, or let it go?
 - You: Who should pay for keeping your thesis tool running after you leave?
 
 **Example answers:**
@@ -80,9 +80,9 @@ Core questions come from my selected (green) questions, lightly reworded and anc
 - Research software engineers; short-cycle maintenance funding.
 - Week 1: Docker may not exist in 40 years; source code most stable.
 
-### 5. C4 Tacit knowledge: One-click scripts
+### 5. C4 Tacit knowledge: One-click reproduction scripts
 
-**Context:** Reviewers warn scripts can be a black box that re-runs the authors' mistakes.
+**Context:** Scripts capture steps that would otherwise stay in the developer's head. Reviewers warn they can be a black box that re-runs the authors' mistakes.
 
 **Question:** Is a one-click reproduction script good or bad for scientific scrutiny?
 
@@ -97,14 +97,14 @@ Core questions come from my selected (green) questions, lightly reworded and anc
 **My notes:**
 - Python file-order case (2019): scripts correct on one OS, wrong on another.
 
-### 6. C4 Tacit knowledge: Getting it out of heads
+### 6. C4 Tacit knowledge: Capturing tacit knowledge
 
 **Context:** Much know-how about a prototype stays in the developer's head.
 
-**Question:** What are practical ways to get that knowledge out of the developer's head?
+**Question:** What practical ways are there to capture this knowledge so that others can use the artifact?
 
 **Follow-ups:**
-- Example: templates, screencasts, onboarding a colleague, automation
+- Example: the order the scripts must run in, hard-coded paths, parameter values that were tried and dropped
 - You: Could someone reproduce your bachelor thesis results from your repository alone?
 
 **Example answers:**
@@ -200,14 +200,14 @@ Core questions come from my selected (green) questions, lightly reworded and anc
 **My notes:**
 - ACM: Evaluated badges with reviewer-only access; Available needs a public archive. Proxies allowed for proprietary data.
 
-### 12. C9 External constraints: How open?
+### 12. C9 External constraints: Open by default
 
 **Context:** IP, privacy and commercial tools limit what can be shared.
 
 **Question:** How open should research software be, and where are the legitimate limits?
 
 **Follow-ups:**
-- Example: "as open as possible, as closed as necessary" (EU research funding rule)
+- Example: a company co-authored the tool and wants to sell it later
 - You: Which part of your own thesis work would you not want to make public, and why?
 
 **Example answers:**
@@ -268,14 +268,14 @@ Core questions come from my selected (green) questions, lightly reworded and anc
 **My notes:**
 - ICSE 2026: setup over 30 min makes acceptance unlikely; MobiSys allows a reduced representative scope.
 
-### 16. C11 Technical obstacles: Compute for reviewers
+### 16. C11 Technical obstacles: Hardware reviewers don't have
 
 **Context:** Reviewers often lack the hardware to run an artifact.
 
 **Question:** Should conferences provide compute and storage for reviewers, e.g. remote servers with containers?
 
 **Follow-ups:**
-- Example: an experiment that needs eight GPUs
+- Example: an experiment needs eight GPUs for a week, and the reviewer has a laptop
 - You: Would you trust a badge from a reviewer who only ran a scaled-down version?
 
 **Example answers:**
@@ -286,14 +286,14 @@ Core questions come from my selected (green) questions, lightly reworded and anc
 - Paper recommends compute funding (teammate's section): keep it short and hand over.
 - SOSP 2019 Azure credits proved hard to use; IISWC has authors provide remote access.
 
-### 17. C12 Limited communication: One-shot or dialogue
+### 17. C12 Limited communication: One-shot or iterative review
 
 **Context:** Reviewers value responsive authors; single-round reviews frustrate both sides.
 
 **Question:** Should artifact evaluation be a one-shot review or a dialogue with the authors?
 
 **Follow-ups:**
-- Example: the artifact fails on a typo in the install instructions
+- Example: the artifact fails on a typo in the install instructions: reject, or ask the authors?
 - You: Later users won't have the authors' help: should reviewers?
 
 **Example answers:**
@@ -310,7 +310,7 @@ Core questions come from my selected (green) questions, lightly reworded and anc
 **Question:** Is that support sustainable, given it can't last forever?
 
 **Follow-ups:**
-- Example: the student who built the tool has graduated
+- Example: the student who built the tool graduated two years ago, and a user's bug report goes unanswered
 - You: Would you answer emails about your thesis code in three years?
 
 **Example answers:**
@@ -327,7 +327,7 @@ Core questions come from my selected (green) questions, lightly reworded and anc
 **Question:** Which reward would actually make researchers invest more in artifacts?
 
 **Follow-ups:**
-- Example: a citable DOI, a best-artifact award, artifacts counted in hiring
+- Example: a best-artifact award at the conference vs. your artifacts counting in your next job application
 - You: What would make you spend an extra week on your thesis artifact?
 
 **Example answers:**
