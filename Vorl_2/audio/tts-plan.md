@@ -28,4 +28,22 @@ in the reading-guide order of `Vorl_2/reading-guide.md`.
 
 Total about 99 min.
 
-Not yet done: Hermann et al. (2020), `3368089.3409767.pdf`.
+## Hermann et al. (2020) – voice test round 4
+
+Same 28 voices as round 3 (`voices-round4.csv`, re-refined on this paper; spread
+before refinement 0.94–1.10), started before round 3 was rated. Two-column PDF:
+the script was reassembled by hand into reading order. Script:
+`scripts/hermann-et-al-2020.txt`. Pace 1.0 = preferred pace.
+
+- Balance: 2.3–2.7 min per voice (median 2.4 min); total about 67 min.
+- Rating sheet: https://claude.ai/artifact/CyDNB4NmrdMeTgAsRgfQzC (private) – source
+  `voice-test-round4/index.html`, starts from round-2 ratings; includes offline saving.
+
+| Track | File | Block | Printed pages | Content / skips | Non-audio items (page) |
+|-------|------|-------|---------------|-----------------|------------------------|
+| 01 | `hermann-01-survey.mp3` | Survey | 469–470, 479 | Abstract, §1, **jump to §8**, boxed key findings, figure overview | – |
+| 02 | `hermann-02-pre-study.mp3` | Pre-study | 471–472 | §3 incl. footnote 5 (ACM swapped the terms) | – |
+| 03 | `hermann-03-method.mp3` | Method | 472–473, 478–479 | §4.1, **jump to §6** threats | Figs. 1–2 (473) |
+| 04 | `hermann-04-results.mp3` | Results | 473–477 | §4.2–4.3, boxed findings in place | – |
+| 05 | `hermann-05-further-insights.mp3` | Further insights | 477–478 | §5 | – |
+| 06 | `hermann-06-background-and-implications.mp3` | Not in the reading plan | 470–471, 479 | §2 background, §7 implications; §8 skipped (heard in 01); acknowledgements, references skipped | – |
