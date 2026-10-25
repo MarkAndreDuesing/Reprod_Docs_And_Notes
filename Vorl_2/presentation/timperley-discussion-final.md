@@ -4,29 +4,63 @@ Generated from `Vorl_2/slides/discussion_questions_timperley.py` (single source 
 
 Core questions come from my selected (green) questions, lightly reworded and anchored in the paper. Follow-ups go on the slide as sub-points. Example answers and my notes go in the speaker notes only; the notes draw on `timperley-research.md` and are not part of the questions.
 
-## Core 8
+## Questions, sorted by challenge (RQ1 last)
 
-### 1. C1: Mistakes found after publication
+### 1. C1: Fear of exposing mistakes
 
-**Question:** If a mistake is found in a published artifact, what should happen to the paper: a correction, a retraction, or just a note on the artifact?
+**Question:** Creators fear that shared code exposes mistakes and harms their reputation: what would make you more or less willing to share your own code?
 
 **Follow-ups:**
-- Example: a bug in the analysis script changes one of five results tables, but not the main conclusion
-- You: Would knowing the answer make you more or less willing to share your own thesis code?
+- Example: a mistake found later through your artifact only leads to a correction note, not a retraction
+- You: Would you share more readily if releasing research code as is, messy and undocumented, were the accepted norm?
 
-**Paper context:** Creators fear that sharing exposes mistakes in their analysis and that poor code harms their reputation.
+**Paper context:** Creators fear that sharing exposes mistakes in their analysis and that poor code quality harms their reputation.
 
 **Example answers:**
-- Correction for honest errors that don't change conclusions; retraction only if the main claims fall.
-- Today's options are binary and stigmatising, so authors prefer not to share at all.
-- A visible erratum on the artifact (like a bug tracker) normalises fixing mistakes.
+- More willing: if consequences for honest errors are proportionate (correction, erratum) and messy code is normal.
+- Less willing: as long as any visible mistake can cost a paper or a reputation, keeping code private is the safer choice.
+- Releasing as is: something checkable beats nothing vs. it wastes users' time and signals sloppiness.
 
 **My notes:**
 - Chang 2006: inherited script flipped two columns, 5 retractions, treated as an honest error.
 - Reinhart & Rogoff 2013: a spreadsheet range error found after the data was shared.
-- Hermann et al.: an AEC found hard-coded outputs, paper withdrawn (misconduct, not error).
+- Hermann et al.: some reviewers prefer availability over quality; an AEC found hard-coded outputs (misconduct, not error).
 
-### 2. C3: Decay and maintenance
+### 2. C1: Unreleased tools
+
+**Question:** Should a paper whose results rest on a tool the authors keep private be treated as a full result or as preliminary until the tool is released?
+
+**Follow-ups:**
+- Example: a new testing technique evaluated with a tool held back for the PhD student's next paper
+- You: Would you cite and build on such a paper in your own thesis?
+
+**Paper context:** Creators hold back artifacts with untapped publication value or fear of being scooped; a limited audience is another reason.
+
+**Example answers:**
+- Full result: peer review judged the paper; the tool is the authors' property.
+- Preliminary: claims that nobody can check are weaker evidence.
+
+**My notes:**
+- Embargoes exist in data-heavy fields (telescope data 12-18 months); no measured scooping rate.
+
+### 3. C2: Portability
+
+**Question:** Does an artifact count as portable if it only runs inside the authors' container image?
+
+**Follow-ups:**
+- Example: the Docker image works, but nobody could rebuild the tool from source
+- You: Would you build your own research on a tool you can only run inside a black-box image?
+
+**Paper context:** Artifacts often fail on other machines (missing information, outdated dependencies); VMs and containers are the usual fix.
+
+**Example answers:**
+- Yes: it runs anywhere Docker runs.
+- No: the image hides how the environment was set up and decays too.
+
+**My notes:**
+- Rebuilding from an unpinned Dockerfile can silently change the result; archive the built image.
+
+### 4. C3: Decay and maintenance
 
 **Question:** Is software decay unavoidable as technology moves on, and who should carry the cost of limiting it?
 
@@ -47,7 +81,7 @@ Core questions come from my selected (green) questions, lightly reworded and anc
 - Maintenance funding runs in short cycles (CZI, DFG calls).
 - Week 1: costly constant maintenance; Docker may not exist in 40 years; source code most stable.
 
-### 3. C4: One-click reproduction scripts
+### 5. C4: One-click reproduction scripts
 
 **Question:** Is a one-click reproduction script good or bad for scientific scrutiny?
 
@@ -66,7 +100,75 @@ Core questions come from my selected (green) questions, lightly reworded and anc
 - Python file-order case (2019): scripts correct on one OS, wrong on another; ~150 studies possibly affected.
 - Push-button replication is an established first step before independent re-implementation.
 
-### 4. C9: Unshareable industry data
+### 6. C4: Tacit knowledge
+
+**Question:** What knowledge about a research prototype typically stays in the developer's head, and could documentation ever capture it?
+
+**Follow-ups:**
+- Example: the order the scripts must run in, hard-coded paths, parameter values that were tried and dropped
+- You: Could someone reproduce your bachelor thesis results from your repository alone?
+
+**Paper context:** Tacit knowledge, buried in developers' heads, makes artifacts hard to understand, extend and reuse.
+
+**Example answers:**
+- Mostly capturable: checklists, a run-everything script, a short walkthrough video.
+- Not fully: some know-how only transfers by talking to the author.
+
+**My notes:**
+
+### 7. C4: Reviewer effort
+
+**Question:** How much effort should an artifact reviewer invest before giving up on an artifact?
+
+**Follow-ups:**
+- Example: after two hours the artifact fails on a missing dependency: fix it yourself, contact the authors, or reject?
+- You: As an author, how much of a reviewer's goodwill would you be comfortable relying on?
+
+**Paper context:** Reviewers report missing instructions and needing the paper to fill gaps; deep dives can take days.
+
+**Example answers:**
+- Little: the artifact should work for a stranger.
+- More: reviewers are the only ones who will ever try; one fix helps everyone after.
+
+**My notes:**
+- Overlaps with the C11 time-limit question; use as its follow-up if needed.
+
+### 8. C7: Very large artifacts
+
+**Question:** How should researchers share artifacts that are too big for archives like Zenodo and for a reviewer's laptop?
+
+**Follow-ups:**
+- Example: several terabytes of mined repository data
+- You: If your thesis data were that large, what would you publish?
+
+**Paper context:** Creators struggle to find hosting for large datasets; GitHub, Dropbox and Google Drive are not long-term archives.
+
+**Example answers:**
+- A representative subset plus scripts to regenerate the rest.
+- Institutional repositories; share the generator, not the data.
+
+**My notes:**
+- Zenodo: 50 GB per record, up to 200 GB on request.
+- Overlaps with the paper's recommendation on proof-of-concept artifacts (teammate's section).
+
+### 9. C7: Dead links and old badges
+
+**Question:** Should a badge expire if the artifact link dies a few years after publication?
+
+**Follow-ups:**
+- Example: a 2016 badge on a paper whose artifact link now returns 404
+- You: Would a label like awarded 2016, not re-checked change how you treat the paper?
+
+**Paper context:** Many artifacts are no longer accessible, older ones more often.
+
+**Example answers:**
+- Yes: a badge should describe the current state.
+- No: it certifies what was checked at review time.
+
+**My notes:**
+- Klein et al. 2014: 13-22 % of web references in articles suffer link rot.
+
+### 10. C9: Unshareable industry data
 
 **Question:** Should a paper be criticised for not sharing data that its industry partner won't release?
 
@@ -85,7 +187,41 @@ Core questions come from my selected (green) questions, lightly reworded and anc
 - ICSE: data sharing not required for acceptance, only a statement of why not.
 - ACM 'Complete' allows proxies for proprietary data.
 
-### 5. C9: Licensed software
+### 11. C9: Formal exceptions
+
+**Question:** Should artifact evaluation have formal exceptions for unshareable artifacts, e.g. evaluating them privately without publishing them?
+
+**Follow-ups:**
+- Example: reviewers get temporary access under NDA, but readers never see the artifact
+- You: Would a badge saying evaluated privately convince you as a reader?
+
+**Paper context:** Some artifacts cannot be shared for legal or privacy reasons; reviewers lack guidance for such cases.
+
+**Example answers:**
+- Yes: at least someone independent has checked it.
+- No: a check that nobody else can repeat adds little.
+
+**My notes:**
+- ACM already separates Evaluated (reviewer access suffices) from Available (public archive).
+
+### 12. C9: Open by default
+
+**Question:** Should research software be open source by default, with closed artifacts needing a justification?
+
+**Follow-ups:**
+- Example: a company co-authored the tool and wants to sell it later
+- You: If your thesis tool had commercial potential, would you open-source it?
+
+**Paper context:** IP restrictions, licences and privacy concerns keep some artifacts closed.
+
+**Example answers:**
+- Yes: publicly funded research should be open.
+- No: it drives industry collaboration away from research.
+
+**My notes:**
+- Horizon Europe: open research data mandatory, 'as open as possible, as closed as necessary', exceptions justified in a data management plan.
+
+### 13. C9: Licensed software
 
 **Question:** Should research tools that depend on paid commercial software be accepted as artifacts at all?
 
@@ -104,7 +240,7 @@ Core questions come from my selected (green) questions, lightly reworded and anc
 - CAV, FORMATS, QEST: case by case via the chairs; FORMATS 2022 accepted MATLAB Online.
 - ACM policy is silent on reviewer licences; each AEC decides. Reviewers are not expected to pay.
 
-### 6. C10: Students as reviewers
+### 14. C10: Students as reviewers
 
 **Question:** Is leaving artifact evaluation to students a good training opportunity, or does it undermine how rigorous and seriously taken the badges are?
 
@@ -122,7 +258,7 @@ Core questions come from my selected (green) questions, lightly reworded and anc
 - Students chosen deliberately from ECOOP/OOPSLA 2013 (current tools, training).
 - Time budget about 8-20 h per artifact; Hermann et al.: most AEC members serve once.
 
-### 7. C11: Fixed time limits
+### 15. C11: Fixed time limits
 
 **Question:** Is it fair to have a fixed time limit (e.g. a 30-minute setup) after which an artifact fails?
 
@@ -140,146 +276,7 @@ Core questions come from my selected (green) questions, lightly reworded and anc
 - ICSE 2026: setup over 30 min makes acceptance unlikely; whole review ~8-20 h.
 - MobiSys: reviewers and authors agree a reduced but representative scope.
 
-### 8. C12: One-shot or iterative review
-
-**Question:** Should artifact evaluation be a one-shot review or an iterative dialogue with the authors?
-
-**Follow-ups:**
-- Example: the artifact fails because of a typo in the install instructions: reject, or ask the authors?
-- You: Later users won't have the authors on call: should the review simulate that?
-
-**Paper context:** Reviewers find single-round reviews frustrating and value authors willing to help, but unresponsive authors leave them waiting.
-
-**Example answers:**
-- Iterative: glitches are inevitable; the fixes help every later user.
-- One-shot: the badge should certify that it works without the authors.
-- Hybrid: a short check-in phase for setup, then a final test without help.
-
-**My notes:**
-- Most venues have a 'kick the tires' phase (SLE: 5-day response); ICSE 2026: answers within 72 h.
-
-## Spares (hidden slides)
-
-### 1. C1: Unreleased tools
-
-**Question:** Should a paper whose results rest on a tool the authors keep private be treated as a full result or as preliminary until the tool is released?
-
-**Follow-ups:**
-- Example: a new testing technique evaluated with a tool held back for the PhD student's next paper
-- You: Would you cite and build on such a paper in your own thesis?
-
-**Paper context:** Creators hold back artifacts with untapped publication value or fear of being scooped; a limited audience is another reason.
-
-**Example answers:**
-- Full result: peer review judged the paper; the tool is the authors' property.
-- Preliminary: claims that nobody can check are weaker evidence.
-
-**My notes:**
-- Embargoes exist in data-heavy fields (telescope data 12-18 months); no measured scooping rate.
-
-### 2. C1: Releasing as is
-
-**Question:** Is releasing an artifact as is, messy and undocumented, better than not releasing it at all?
-
-**Follow-ups:**
-- Example: a working but uncommented collection of scripts from a thesis
-- You: Would you publish your own thesis code today exactly as it is?
-
-**Paper context:** Creators fear poor code quality harms their reputation; users complain about undocumented, incomprehensible artifacts.
-
-**Example answers:**
-- Better: something checkable beats nothing.
-- Worse: it signals sloppiness and wastes users' time.
-
-**My notes:**
-- Hermann et al.: some reviewers prefer availability over quality.
-
-### 3. C4: Tacit knowledge
-
-**Question:** What knowledge about a research prototype typically stays in the developer's head, and could documentation ever capture it?
-
-**Follow-ups:**
-- Example: the order the scripts must run in, hard-coded paths, parameter values that were tried and dropped
-- You: Could someone reproduce your bachelor thesis results from your repository alone?
-
-**Paper context:** Tacit knowledge, buried in developers' heads, makes artifacts hard to understand, extend and reuse.
-
-**Example answers:**
-- Mostly capturable: checklists, a run-everything script, a short walkthrough video.
-- Not fully: some know-how only transfers by talking to the author.
-
-**My notes:**
-
-### 4. C4: Reviewer effort
-
-**Question:** How much effort should an artifact reviewer invest before giving up on an artifact?
-
-**Follow-ups:**
-- Example: after two hours the artifact fails on a missing dependency: fix it yourself, contact the authors, or reject?
-- You: As an author, how much of a reviewer's goodwill would you be comfortable relying on?
-
-**Paper context:** Reviewers report missing instructions and needing the paper to fill gaps; deep dives can take days.
-
-**Example answers:**
-- Little: the artifact should work for a stranger.
-- More: reviewers are the only ones who will ever try; one fix helps everyone after.
-
-**My notes:**
-- Overlaps with the C11 time-limit question; use as its follow-up if needed.
-
-### 5. C9: Formal exceptions
-
-**Question:** Should artifact evaluation have formal exceptions for unshareable artifacts, e.g. evaluating them privately without publishing them?
-
-**Follow-ups:**
-- Example: reviewers get temporary access under NDA, but readers never see the artifact
-- You: Would a badge saying evaluated privately convince you as a reader?
-
-**Paper context:** Some artifacts cannot be shared for legal or privacy reasons; reviewers lack guidance for such cases.
-
-**Example answers:**
-- Yes: at least someone independent has checked it.
-- No: a check that nobody else can repeat adds little.
-
-**My notes:**
-- ACM already separates Evaluated (reviewer access suffices) from Available (public archive).
-
-### 6. C9: Open by default
-
-**Question:** Should research software be open source by default, with closed artifacts needing a justification?
-
-**Follow-ups:**
-- Example: a company co-authored the tool and wants to sell it later
-- You: If your thesis tool had commercial potential, would you open-source it?
-
-**Paper context:** IP restrictions, licences and privacy concerns keep some artifacts closed.
-
-**Example answers:**
-- Yes: publicly funded research should be open.
-- No: it drives industry collaboration away from research.
-
-**My notes:**
-- Horizon Europe: open research data mandatory, 'as open as possible, as closed as necessary', exceptions justified in a data management plan.
-
-### 7. C7: Very large artifacts
-
-**Question:** How should researchers share artifacts that are too big for archives like Zenodo and for a reviewer's laptop?
-
-**Follow-ups:**
-- Example: several terabytes of mined repository data
-- You: If your thesis data were that large, what would you publish?
-
-**Paper context:** Creators struggle to find hosting for large datasets; GitHub, Dropbox and Google Drive are not long-term archives.
-
-**Example answers:**
-- A representative subset plus scripts to regenerate the rest.
-- Institutional repositories; share the generator, not the data.
-
-**My notes:**
-- Zenodo: 50 GB per record, up to 200 GB on request.
-- Overlaps with the paper's recommendation on proof-of-concept artifacts (teammate's section).
-
-### 8. C11: Hardware reviewers don't have
+### 16. C11: Hardware reviewers don't have
 
 **Question:** Should artifacts that need more hardware than reviewers have still be eligible for a badge?
 
@@ -297,41 +294,25 @@ Core questions come from my selected (green) questions, lightly reworded and anc
 - Avoid 'who provides compute' (paper's recommendation, teammate's section).
 - SOSP 2019 Azure credits proved hard to use; IISWC has authors provide remote access.
 
-### 9. C2: Portability
+### 17. C12: One-shot or iterative review
 
-**Question:** Does an artifact count as portable if it only runs inside the authors' container image?
-
-**Follow-ups:**
-- Example: the Docker image works, but nobody could rebuild the tool from source
-- You: Would you build your own research on a tool you can only run inside a black-box image?
-
-**Paper context:** Artifacts often fail on other machines (missing information, outdated dependencies); VMs and containers are the usual fix.
-
-**Example answers:**
-- Yes: it runs anywhere Docker runs.
-- No: the image hides how the environment was set up and decays too.
-
-**My notes:**
-- Rebuilding from an unpinned Dockerfile can silently change the result; archive the built image.
-
-### 10. C7: Dead links and old badges
-
-**Question:** Should a badge expire if the artifact link dies a few years after publication?
+**Question:** Should artifact evaluation be a one-shot review or an iterative dialogue with the authors?
 
 **Follow-ups:**
-- Example: a 2016 badge on a paper whose artifact link now returns 404
-- You: Would a label like awarded 2016, not re-checked change how you treat the paper?
+- Example: the artifact fails because of a typo in the install instructions: reject, or ask the authors?
+- You: Later users won't have the authors on call: should the review simulate that?
 
-**Paper context:** Many artifacts are no longer accessible, older ones more often.
+**Paper context:** Reviewers find single-round reviews frustrating and value authors willing to help, but unresponsive authors leave them waiting.
 
 **Example answers:**
-- Yes: a badge should describe the current state.
-- No: it certifies what was checked at review time.
+- Iterative: glitches are inevitable; the fixes help every later user.
+- One-shot: the badge should certify that it works without the authors.
+- Hybrid: a short check-in phase for setup, then a final test without help.
 
 **My notes:**
-- Klein et al. 2014: 13-22 % of web references in articles suffer link rot.
+- Most venues have a 'kick the tires' phase (SLE: 5-day response); ICSE 2026: answers within 72 h.
 
-### 11. C12: Support after publication
+### 18. C12: Support after publication
 
 **Question:** Can authors be expected to support their artifacts after publication, and for how long?
 
@@ -348,7 +329,7 @@ Core questions come from my selected (green) questions, lightly reworded and anc
 **My notes:**
 - Overlaps with C3; use as its follow-up if needed.
 
-### 12. RQ1: Rewards
+### 19. RQ1: Rewards
 
 **Question:** Which reward would actually make researchers invest more in their artifacts?
 

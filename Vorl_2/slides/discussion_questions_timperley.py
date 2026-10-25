@@ -1,8 +1,8 @@
 """Paper 2 (Timperley) discussion questions: single source for the notes file and the slides.
 
 Usage: python3 discussion_questions_timperley.py <in.pptx> <out.pptx> <out.md>
-Inserts the core question slides after the slide titled "Paper 2 · Discussion (Kevin)",
-then the spares (hidden). The existing idea-dump slides follow and are hidden.
+Inserts the question slides, sorted by challenge, after the slide titled
+"Paper 2 · Discussion (Kevin)". The existing idea-dump slides follow and are hidden.
 """
 import sys, copy
 from pptx import Presentation
@@ -12,17 +12,17 @@ from pptx.enum.shapes import MSO_SHAPE
 
 # Each item: (title, question, example, perspective, paper context, example answers, my notes)
 Q = [
- ("C1: Mistakes found after publication",
-  "If a mistake is found in a published artifact, what should happen to the paper: a correction, a retraction, or just a note on the artifact?",
-  "a bug in the analysis script changes one of five results tables, but not the main conclusion",
-  "Would knowing the answer make you more or less willing to share your own thesis code?",
-  "Creators fear that sharing exposes mistakes in their analysis and that poor code harms their reputation.",
-  ["Correction for honest errors that don't change conclusions; retraction only if the main claims fall.",
-   "Today's options are binary and stigmatising, so authors prefer not to share at all.",
-   "A visible erratum on the artifact (like a bug tracker) normalises fixing mistakes."],
+ ("C1: Fear of exposing mistakes",
+  "Creators fear that shared code exposes mistakes and harms their reputation: what would make you more or less willing to share your own code?",
+  "a mistake found later through your artifact only leads to a correction note, not a retraction",
+  "Would you share more readily if releasing research code as is, messy and undocumented, were the accepted norm?",
+  "Creators fear that sharing exposes mistakes in their analysis and that poor code quality harms their reputation.",
+  ["More willing: if consequences for honest errors are proportionate (correction, erratum) and messy code is normal.",
+   "Less willing: as long as any visible mistake can cost a paper or a reputation, keeping code private is the safer choice.",
+   "Releasing as is: something checkable beats nothing vs. it wastes users' time and signals sloppiness."],
   ["Chang 2006: inherited script flipped two columns, 5 retractions, treated as an honest error.",
    "Reinhart & Rogoff 2013: a spreadsheet range error found after the data was shared.",
-   "Hermann et al.: an AEC found hard-coded outputs, paper withdrawn (misconduct, not error)."]),
+   "Hermann et al.: some reviewers prefer availability over quality; an AEC found hard-coded outputs (misconduct, not error)."]),
  ("C3: Decay and maintenance",
   "Is software decay unavoidable as technology moves on, and who should carry the cost of limiting it?",
   "a 2015 thesis tool needs Python 2 and a library that no longer exists: fix it, freeze it in an image, or let it go?",
@@ -102,14 +102,6 @@ SPARES = [
   ["Full result: peer review judged the paper; the tool is the authors' property.",
    "Preliminary: claims that nobody can check are weaker evidence."],
   ["Embargoes exist in data-heavy fields (telescope data 12-18 months); no measured scooping rate."]),
- ("C1: Releasing as is",
-  "Is releasing an artifact as is, messy and undocumented, better than not releasing it at all?",
-  "a working but uncommented collection of scripts from a thesis",
-  "Would you publish your own thesis code today exactly as it is?",
-  "Creators fear poor code quality harms their reputation; users complain about undocumented, incomprehensible artifacts.",
-  ["Better: something checkable beats nothing.",
-   "Worse: it signals sloppiness and wastes users' time."],
-  ["Hermann et al.: some reviewers prefer availability over quality."]),
  ("C4: Tacit knowledge",
   "What knowledge about a research prototype typically stays in the developer's head, and could documentation ever capture it?",
   "the order the scripts must run in, hard-coded paths, parameter values that were tried and dropped",
@@ -192,6 +184,18 @@ SPARES = [
   ["JOSS: citable software papers. Possible overlap with the teammate's recommendations."]),
 ]
 
+ORDER = ["C1: Fear of exposing mistakes", "C1: Unreleased tools", "C2: Portability", "C3: Decay and maintenance",
+         "C4: One-click reproduction scripts", "C4: Tacit knowledge", "C4: Reviewer effort",
+         "C7: Very large artifacts", "C7: Dead links and old badges",
+         "C9: Unshareable industry data", "C9: Formal exceptions", "C9: Open by default", "C9: Licensed software",
+         "C10: Students as reviewers", "C11: Fixed time limits", "C11: Hardware reviewers don't have",
+         "C12: One-shot or iterative review", "C12: Support after publication", "RQ1: Rewards"]
+
+def ordered():
+    items = {x[0]: x for x in Q + SPARES}
+    assert set(items) == set(ORDER), set(items) ^ set(ORDER)
+    return [items[t] for t in ORDER]
+
 def markdown():
     out = ["# Timperley et al. (2021): Discussion Questions (Challenges, §4.2)", "",
            "Generated from `Vorl_2/slides/discussion_questions_timperley.py` (single source for slides and notes).", "",
@@ -206,7 +210,7 @@ def markdown():
                         f"**Paper context:** {ctx}", ""])
             out.extend(["**Example answers:**"] + [f"- {x}" for x in a] + [""])
             out.extend(["**My notes:**"] + [f"- {x}" for x in n] + [""])
-    block(Q, "Core 8"); block(SPARES, "Spares (hidden slides)")
+    block(ordered(), "Questions, sorted by challenge (RQ1 last)")
     return "\n".join(out)
 
 def build(src, dst):
@@ -247,7 +251,7 @@ def build(src, dst):
                                                "\n\nMY NOTES (background, not on slide)\n" + ("\n".join("- " + x for x in n) or "-"))
         if hidden: s._element.set("show", "0")
         return s
-    new = [add(x, False) for x in Q] + [add(x, True) for x in SPARES]
+    new = [add(x, False) for x in ordered()]
     for d in dumps: d._element.set("show", "0")
     lst = p.slides._sldIdLst
     def eid(sl): return next(e for e in lst if p.part.rels[e.rId]._target is sl.part)
