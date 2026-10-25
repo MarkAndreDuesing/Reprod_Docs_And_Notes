@@ -89,3 +89,12 @@ parts of:
 - **points of interest** (ideas worth exploring further)
 - **subjective discourse** (opinion questions without a right answer, linked
   to your own experience as a researcher or student)
+
+## Skills for slides and discussion questions
+
+Two general-purpose skills in `.claude/skills/` (loaded automatically by Claude Code in this repo):
+- `discussion-questions`: from source material and your own ideas to refined discussion
+  questions (research first, grouping, one-sentence questions with Example/You follow-ups,
+  quality checklist).
+- `presentation-slides`: summary and discussion slides in the LMU house style, as a new deck
+  or inserted into an existing one (`build_slides.py` + `content-template.json`).

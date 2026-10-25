@@ -1,0 +1,41 @@
+{
+  "mode": "new",
+  "_extend_mode_keys": "for mode 'extend' add: base (existing .pptx), insert_after (first text of the slide to insert after), style_ref (first text of a slide whose header shape and layout to reuse)",
+  "groups": {
+    "A": {"symbol": "■", "color": "00883A", "name": "creator"},
+    "B": {"symbol": "▲", "color": "5F6368", "name": "user"},
+    "C": {"symbol": "★", "color": "1A1A1A", "name": "reviewer"}
+  },
+  "slides": [
+    {"type": "title", "title": "Lecture N: Paper Discussion", "subtitle": "Author et al. (Venue Year)", "small": "Seminar name · date"},
+    {"type": "section", "title": "Paper 1", "subtitle": "Full reference"},
+    {"type": "callout", "title": "General Summary",
+     "callout": ["Core question of the source?", "Second core question?"],
+     "bullets": [{"b": "Problem:", "t": "…"}, {"b": "Approach:", "t": "…"}, {"b": "Findings:", "t": "…"}, {"b": "Output:", "t": "…"}],
+     "notes": "Detail and page references go here."},
+    {"type": "rows", "title": "Terminology / Definitions", "rows": [["Term", "short definition"], ["Term 2", "short definition"]]},
+    {"type": "table", "title": "Terminology / Definitions", "label": "Optional location label [1]",
+     "header": ["Column A", "Column B", "Column C"], "rows": [["…", "…", "…"]], "widths": [3, 3, 5.93], "foot": "Optional foot [1]"},
+    {"type": "bullets", "title": "Research Questions", "bullets": [{"b": "RQ1:", "t": "…"}, {"b": "RQ2:", "t": "…"}]},
+    {"type": "panels", "title": "Methodology", "lead": {"b": "Design:", "t": "one line"},
+     "panels": [{"title": "Part 1", "bullets": ["approach", "approach"]}, {"title": "Part 2", "bullets": ["approach"]}],
+     "foot": "how the parts come together"},
+    {"type": "tiles", "title": "Results", "label": "RQ1 · …",
+     "statement": [{"b": "Main result:", "t": "…"}], "tiles_label": "Optional tile heading",
+     "tiles": [["Tile 1", "short text"], ["Tile 2", "short text"], ["Tile 3", "short text"]]},
+    {"type": "grid", "title": "Results", "label": "RQ2 · overview",
+     "items": [{"id": "C1", "name": "Category name", "groups": "A"}, {"id": "C2", "name": "Category name", "groups": "ABC"}]},
+    {"type": "category_table", "title": "Results", "label": "RQ2 · C1-C3", "header": ["Challenge", "Points raised"],
+     "items": [{"id": "C1", "name": "Category name", "groups": "AB", "points": [["A", "point raised by group A"], ["B", "point raised by group B"]]}],
+     "foot": "optional context line"},
+    {"type": "rows", "title": "Validity / Discussion", "rows": [["Construct", "…"], ["Internal", "…"], ["External", "…"]]},
+    {"type": "question", "header": "Paper 1 · Discussion", "title": "C1 Category name: Topic",
+     "context": "One short sentence of context from the source.",
+     "question": "One-sentence question?",
+     "example": "a concrete situation",
+     "perspective": "a short put-yourself-in-their-shoes question?",
+     "answers": ["position A", "position B"], "background": ["research fact for the presenter only"]},
+    {"type": "references", "refs": ["Source 1, URL", "Source 2, URL"]},
+    {"type": "section", "title": "Thank you for your attention"}
+  ]
+}

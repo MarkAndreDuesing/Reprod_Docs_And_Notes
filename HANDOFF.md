@@ -26,6 +26,7 @@ you the lecture slides and two papers.
 | `templates/cross-paper-template.md` | Comparison table and cross-paper questions |
 | `templates/paper-notes-template.md` | Condensed bullet notes of what a paper says (incl. condensing the user's own copied snippets) |
 | `templates/moderation-template.md` | **The user moderates lecture 2.** Question sequence and the quality test for discussion questions |
+| `.claude/skills/discussion-questions/`, `.claude/skills/presentation-slides/` | General skills for refining discussion questions and building summary/discussion slides (LMU style) |
 | `Vorl_1/reading-guide.md` | Filled example: per-block time plan mapped to real page ranges |
 | `Vorl_1/discussion/*.md` | Filled examples: one file per paper and `cross-paper.md` |
 | `Vorl_1/notes/collberg-proebsting-2016.md` | Filled example of condensed notes, made from the user's own snippets and comments |
