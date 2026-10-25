@@ -4,6 +4,8 @@ How to turn lecture papers into MP3s you can listen to, to lighten the reading l
 Copy this file to `Vorl_N/audio/tts-plan.md`, fill in the per-week section and
 generate the audio from it.
 
+**Hands-on steps (setup, commands, where the state is): `tts-runbook.md`.**
+
 ## Requirements
 
 - **Language/accent:** British English for English papers; German voice for
