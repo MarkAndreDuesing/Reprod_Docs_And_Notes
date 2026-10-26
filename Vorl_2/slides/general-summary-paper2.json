@@ -1,15 +1,32 @@
 {
   "mode": "new",
   "slides": [
-    {"type": "callout", "title": "General Summary",
-     "callout": ["Why is making good artifacts hard?", "Potential solutions to this?"],
-     "bullets": [
-       {"b": "Paper:", "t": "why good artifact sharing is hard in SE"},
-       {"b": "Did:", "t": "publication survey (artifact availability) + author survey (challenges)"},
-       {"b": "Found:", "t": "artifacts are valued; challenges in creating, sharing, using and reviewing artifacts"},
-       {"b": "Analysed:", "t": "why these challenges persist + how they connect (secondary analysis)"},
-       {"b": "Then:", "t": "recommendations for researchers, reviewers and institutions"}
-     ],
-     "notes": "SPEAKING PROTOCOL (about 30 seconds)\n\n1. Link to last week: \"Last week's papers asked why so few working artifacts exist. This paper asks why making good artifacts is hard, and what could be done about it.\" (point to the green questions)\n\n2. Paper: \"Timperley and colleagues from Carnegie Mellon, published in Empirical Software Engineering in 2021.\"\n\n3. Did: \"They did two studies in parallel: a publication survey, checking how many papers at top SE venues link an artifact and whether those links still work, and an author survey asking researchers about their experiences as creators, users and reviewers of artifacts.\"\n\n4. Found: \"First, the community does value artifacts, and sharing has become a norm. Second, there are many challenges along the way, in creating, sharing, using and reviewing artifacts. We'll go through them in a moment.\"\n\n5. Analysed: \"In a secondary analysis they look at why these challenges persist and how they connect.\"\n\n6. Then: \"From that they derive recommendations for researchers, reviewers and institutions; [teammate] will present those later.\"\n\nHand-over: \"First, some terms we need.\" (next slide: Terminology)\n\nBACKGROUND IF ASKED\n- Publication survey: technical-track papers at ICSE, FSE, ASE and EMSE, 2014-2018; artifact = any linked material; available = link still works.\n- Author survey: authors of 2018 papers at those venues; open answers coded into themes.\n- 12 challenges (C1-C12); 8 recommendations (R1-R8)."}
+    {
+      "type": "bullets",
+      "title": "General Summary",
+      "bullets": [
+        {
+          "b": "Paper:",
+          "t": "why good artifact sharing is hard in SE"
+        },
+        {
+          "b": "Did:",
+          "t": "publication survey (artifact availability) + author survey (challenges)"
+        },
+        {
+          "b": "Found:",
+          "t": "artifacts are valued; challenges in creating, sharing, using and reviewing artifacts"
+        },
+        {
+          "b": "Analysed:",
+          "t": "why these challenges persist + how they connect (secondary analysis)"
+        },
+        {
+          "b": "Then:",
+          "t": "recommendations for researchers, reviewers and institutions"
+        }
+      ],
+      "notes": "SPEAKING PROTOCOL (about 30 seconds)\n\n1. Link to last week: \"Last week's papers asked why so few working artifacts exist. This paper asks why making good artifacts is hard, and what could be done about it.\"\n\n2. Paper: \"Timperley and colleagues from Carnegie Mellon, published in Empirical Software Engineering in 2021.\"\n\n3. Did: \"They did two studies in parallel: a publication survey, checking how many papers at top SE venues link an artifact and whether those links still work, and an author survey asking researchers about their experiences as creators, users and reviewers of artifacts.\"\n\n4. Found: \"First, the community does value artifacts, and sharing has become a norm. Second, there are many challenges along the way, in creating, sharing, using and reviewing artifacts. We'll go through them in a moment.\"\n\n5. Analysed: \"In a secondary analysis they look at why these challenges persist and how they connect.\"\n\n6. Then: \"From that they derive recommendations for researchers, reviewers and institutions; [teammate] will present those later.\"\n\nHand-over: \"First, some terms we need.\" (next slide: Terminology)\n\nBACKGROUND IF ASKED\n- Publication survey: technical-track papers at ICSE, FSE, ASE and EMSE, 2014-2018; artifact = any linked material; available = link still works.\n- Author survey: authors of 2018 papers at those venues; open answers coded into themes.\n- 12 challenges (C1-C12); 8 recommendations (R1-R8)."
+    }
   ]
 }
