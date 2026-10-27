@@ -431,6 +431,66 @@ item gives facts students can build on without background research of their own.
   say up front who may see the data. Risk is highest in small communities, e.g. a single
   company's developers.
 
+## Part 3: Research for the third question revision
+
+### 23. Who pays for artifact evaluation and licences (C9 licensed software)
+- No source states an artifact-evaluation budget. AECs are volunteer committees set up by
+  the conference organisers (SIGMOBILE guidance); some SIGs run a standing AEC (SIGIR).
+  Conferences have sponsors (e.g. MobiSys 2026: Huawei, ACM SIGMOBILE), but nothing ties
+  them to artifact evaluation. Treat "AE has no dedicated budget" as likely, not verified.
+- Licences: CAV asks authors who cannot provide a VM or Docker image with licensed software
+  (e.g. MATLAB) to contact the chairs for a case-by-case solution; FORMATS 2022 accepted a
+  shared MATLAB Drive folder runnable in MATLAB Online. No source says who pays for a
+  reviewer's licence; in practice reviewers rely on their own university's campus licences
+  (unverified).
+- Cloud and hardware cost: the Programming journal notes one option is that authors pay
+  for a cloud instance reviewers can use; SOSP 2023 allows public cloud only if authors pay.
+
+### 24. Actual time limits (C11 fixed time limits)
+- Setup ("getting started") is usually about 30 minutes, phrased as a guideline, not a
+  cutoff: OSDI 2021/2023 ("e.g., within 30 minutes"), OOPSLA 2023 ("roughly 30 minutes"),
+  ICSE 2026 (over 30 minutes makes acceptance unlikely).
+- Full experiments: NDSS 2027 asks that they take at most 1 day on a commodity desktop.
+- Reviewer budget: about 8-20 hours per artifact (SOSP 2021, APLAS 2022).
+- Response windows: ECOOP and MODELS 2023 give authors 4 days to answer kick-the-tires
+  reports; SLE 2025 5 days; ICSE 2026 72 h.
+- No venue found that varies limits by artifact type; heavy artifacts are handled by
+  negotiated reduced scope (MobiSys) or remote access instead.
+
+### 25. How hardware for reviewers is handled today (C11 hardware, C7/C11 unreviewable)
+- Common rule: authors provide anonymous remote access to special hardware (SSH with
+  reviewers' keys; no forms asking for reviewer identity):
+  SenSys 2024, SACMAT 2026 (HPC, cloud, SGX, GPU, TPU), IEEE S&P 2026, MICRO 2026.
+- MICRO 2026 may decline to evaluate artifacts when no reviewer has access to the required
+  hardware, i.e. such artifacts become unreviewable in practice.
+- Testbeds (Chameleon, CloudLab) are used in systems research; donated cloud credits (SOSP
+  2019) proved hard to use.
+- Relation to the paper: Timperley's Rec 6/7 suggest providing compute resources / cloud
+  credits funded by ACM and IEEE (teammate's section). Current practice instead shifts the
+  burden to authors, which is the hand-over point.
+
+### 26. Concrete decay examples (C3)
+- Python 2 reached end of life on 1 Jan 2020; Arch Linux removed it from its repositories.
+  The metabarcoding tool OBITools (Python 2) is no longer maintainable; its maintainers
+  provide a Docker image so it can still be run for reproducibility.
+- Docker Hub announced in August 2020 that images of free accounts not pulled for 6 months
+  would be deleted (from Nov 2020); after protests the enforcement was paused. Shows that
+  even "frozen" images depend on a commercial host's policy.
+- NMR script bug (item 9): code that ran correctly for years gave wrong results on newer
+  operating systems.
+
+### 27. Hermann et al. wording (C12)
+- Conclusion (p. 479): "Reviewers want replicability, users want reusability." Note that
+  "replicability" is the old ACM term, i.e. today's reproducibility (re-running the authors'
+  artifact).
+- Also relevant: 34 users saw no difference between evaluated and unevaluated artifacts,
+  20 did (p. 477).
+
+### 28. Lecturer's own work (context)
+- Beyer & Winter (LMU) gave an FSE 2025 tutorial "Artifact Evaluations for Stronger
+  Research Results" on how AE works, its pitfalls and best practices; materials at
+  stefan-winter.net/ae-materials.html. Good to know since the lecturer co-wrote Paper 1.
+
 ## Sources
 
 - Lecture slides: `Vorl_1/IntroductoryLecture.pdf`, slides 3, 6–11/24
@@ -475,3 +535,8 @@ item gives facts students can build on without background research of their own.
 - [Research Artifacts in SE Publications: Status and Trends (2024)](https://arxiv.org/abs/2404.06852)
 - [JOSS design and first-year review](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7340488/)
 - [QDR practice paper (CODATA)](https://datascience.codata.org/articles/674), [PRIMR: qualitative data sharing and IRBs](https://blog.primr.org/at-the-dawn-of-qualitative-data-sharing-questions-irbs-may-want-to-ask-during-protocol-review)
+- [SIGMOBILE artifact guidelines](https://www.sigmobile.org/grav/about/artifact-guidelines), [SIGIR artifact badging](https://sigir.org/general-information/acm-sigir-artifact-badging/), [MobiSys 2026](https://www.sigmobile.org/mobisys/2026/artifact_evaluation/)
+- [OSDI '23 call for artifacts](https://www.usenix.org/conference/osdi23/call-for-artifacts), [OOPSLA 2023 artifacts](https://2023.splashcon.org/track/splash-2023-Artifacts), [NDSS 2027 call](https://secartifacts.github.io/ndss2027/call), [MODELS 2023 AE](https://conf.researchr.org/track/models-2023/models-2023-artifact-evaluation), [ECOOP 2023 AE](https://2023.ecoop.org/track/ecoop-2023-artifacts)
+- [SenSys 2024 AE](http://sensys.acm.org/2024/art/), [SACMAT 2026 call](https://www.sacmat.org/2026/call-for-artifacts.php), [IEEE S&P 2026 AE](https://sp2026.ieee-security.org/artifact_instructions.html), [MICRO 2026 AE](https://micro2026ae.hotcrp.com/), [SysArtifacts packaging guide](https://sysartifacts.github.io/packaging-guide), [Programming journal AE](https://programming-journal.org/artifact-evaluation/)
+- [Arch Linux: removing python2](https://archlinux.org/news/removing-python2-from-the-repositories/), [OBITools legacy](https://forge.metabarcoding.org/obitools/obitools), [InfoQ: Docker image expiration](https://www.infoq.com/news/2020/11/docker-image-expiration-plans/), [Docker: retention policy delayed](https://www.docker.com/blog/docker-hub-image-retention-policy-delayed-and-subscription-updates/)
+- [Beyer & Winter FSE 2025 tutorial](https://www.sosy-lab.org/research/pub/2025-FSE.Artifact_Evaluations_for_Stronger_Research_Results.pdf)
