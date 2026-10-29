@@ -91,7 +91,12 @@ Spread one paper over many voices to compare them on real content:
 - Rate on the rating sheet page (audio player, highlighted current voice,
   bad/medium/good per voice, keys 1/2/3, export as Markdown or CSV).
   First used in `Vorl_1/audio/voice-test/`.
-- `--voices voices.csv` switches the generator to this mode. Snippets are balanced
+- `--voices voices.csv` switches the generator to this mode.
+- **Voice order is mixed** (default): voices from less common models are spread
+  evenly, and neighbouring voices differ in sex and accent, so similar voices
+  don't blend together (`--no-mix` keeps the CSV order).
+- **3-second pause at every voice switch** (`--switch-gap`, default 3.0), so each
+  new voice is clearly separate. The timestamps start after the pause. Snippets are balanced
   by expected speaking time (greedy, whole sentences, share recomputed per voice),
   so no voice gets a tiny snippet.
 - Even out speaking rates in two steps: `calibrate_voices.py` (fixed passage) before

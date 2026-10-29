@@ -89,6 +89,41 @@ def synth(voices, model, speaker, text, length_scale, tmp):
     return out.read_bytes()
 
 
+def mixed_order(vlist):
+    """Reorder voices so neighbours sound different. Voices from the less common
+    models are spread evenly over the whole recording; the remaining slots are
+    filled from the most common model (e.g. vctk speakers), each time picking a
+    voice whose sex and accent differ from the one before. Grouping voices from
+    one model makes them blend together."""
+    from collections import Counter
+    n = len(vlist)
+    counts = Counter(v["model"] for v in vlist)
+    main = counts.most_common(1)[0][0]
+    others = [v for v in vlist if v["model"] != main]
+    slots = [None] * n
+    for k, v in enumerate(others):
+        pos = min(n - 1, int((k + 0.5) * n / len(others)))
+        while slots[pos] is not None:
+            pos = (pos + 1) % n
+        slots[pos] = v
+    pool = [v for v in vlist if v["model"] == main]
+    for i in range(n):
+        if slots[i] is not None:
+            continue
+        prev = slots[i - 1] if i else None
+        nxt = slots[i + 1] if i + 1 < n else None
+        def score(v):
+            diff = 0
+            for nb in (prev, nxt):
+                if nb is not None:
+                    diff += (v.get("sex") == nb.get("sex")) * 2 + (v.get("accent") == nb.get("accent"))
+            return diff
+        best = min(pool, key=score)
+        slots[i] = best
+        pool.remove(best)
+    return slots
+
+
 def silence(sec):
     return b"\x00\x00" * int(RATE * sec)
 
@@ -106,6 +141,10 @@ def main():
     ap.add_argument("--speed", type=float, default=1.0,
                     help="overall speed relative to the preferred pace (BASE_PACE), e.g. 1.08 = 8 %% faster")
     ap.add_argument("--album", default="")
+    ap.add_argument("--switch-gap", type=float, default=3.0,
+                    help="seconds of silence when the voice changes (voice tests)")
+    ap.add_argument("--no-mix", dest="mix", action="store_false",
+                    help="keep voices.csv order instead of mixing models and sexes")
     ap.add_argument("--bitrate", default="48k")
     a = ap.parse_args()
 
@@ -127,6 +166,8 @@ def main():
     if a.voices:
         with open(a.voices) as f:
             vlist = list(csv.DictReader(f))
+        if a.mix:
+            vlist = mixed_order(vlist)
         # Balance by expected speaking time. Voices are rate-calibrated, so text
         # length (characters) is a good proxy. Greedy: each voice takes whole
         # sentences until it reaches its share of what is left; the share is
@@ -161,6 +202,7 @@ def main():
                 if vi != cur:
                     if segments and segments[-1]["track"] == t["stem"] and cur is not None:
                         segments[-1]["end"] = len(pcm) / 2 / RATE
+                        pcm += silence(a.switch_gap)  # pause between voices
                     v = vlist[vi]
                     segments.append({"voice_no": v["no"], "model": v["model"],
                                      "speaker": v.get("speaker", ""), "track": t["stem"],

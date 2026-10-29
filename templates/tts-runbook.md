@@ -77,7 +77,7 @@ they are conveniences, the repo holds the sources.
 | What | File |
 |------|------|
 | All voices with sex/accent and calibration | `Vorl_1/audio/voice-test/voices.csv` |
-| Ratings per round | `Vorl_1/audio/voice-test/ratings-round1.csv`, `Vorl_1/audio/voice-test-round2/ratings-round2.csv` (round 3: export still to be added) |
-| Current shortlist (refined calibration) | `Vorl_2/audio/voices-round4.csv` (same voices as round 3) |
+| Ratings per round | `Vorl_1/audio/voice-test/ratings-round1.csv`, `Vorl_1/audio/voice-test-round2/ratings-round2.csv` , `Vorl_2/audio/voice-test-round3/ratings-round3.csv` (round 4 skipped) |
+| Current shortlist (refined calibration) | `Vorl_2/audio/voices-round5.csv` (22 voices after round 3) |
 | Plans, track lists, sheet links | `Vorl_1/audio/tts-plan.md`, `Vorl_2/audio/tts-plan.md` |
 | Scripts, MP3s, timestamps | `Vorl_*/audio/scripts/`, `Vorl_*/audio/voice-test*/` |

@@ -47,3 +47,12 @@ the script was reassembled by hand into reading order. Script:
 | 04 | `hermann-04-results.mp3` | Results | 473–477 | §4.2–4.3, boxed findings in place | – |
 | 05 | `hermann-05-further-insights.mp3` | Further insights | 477–478 | §5 | – |
 | 06 | `hermann-06-background-and-implications.mp3` | Not in the reading plan | 470–471, 479 | §2 background, §7 implications; §8 skipped (heard in 01); acknowledgements, references skipped | – |
+
+## Round 3 and 4 results
+
+- Round 3 ratings: `voice-test-round3/ratings-round3.csv` (2 good, 20 medium, 6 bad).
+- Round 4 was skipped (no ratings); disregard it for the voice choice.
+- Round 5 shortlist: `voices-round5.csv`, the 22 good and medium voices, with
+  calibration refined on Timperley et al. From round 5 on, voices are played in a
+  mixed order (models spread, sex and accent alternating) with a 3-second pause
+  between voices.
