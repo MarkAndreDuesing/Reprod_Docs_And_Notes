@@ -24,6 +24,7 @@ you the lecture slides and two papers.
 | `templates/reading-guide-template.md` | Three-pass method, five Cs, claim → evidence → doubt table, time plans by paper type, standard questions, discussion roles |
 | `templates/paper-discussion-template.md` | Sections for one paper's discussion file |
 | `templates/cross-paper-template.md` | Comparison table and cross-paper questions |
+| `.claude/skills/discussion-slides/` | Skill for the discussion slide deck: structure, style rules, renderer, content template |
 | `templates/paper-notes-template.md` | Condensed bullet notes of what a paper says (incl. condensing the user's own copied snippets) |
 | `templates/moderation-template.md` | **The user moderates lecture 2.** Question sequence and the quality test for discussion questions |
 | `Vorl_1/reading-guide.md` | Filled example: per-block time plan mapped to real page ranges |

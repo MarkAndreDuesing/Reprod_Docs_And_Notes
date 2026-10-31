@@ -11,6 +11,7 @@ Vorl_N/
 ├── <paper 1>.pdf
 ├── <paper 2>.pdf
 ├── reading-guide.md          ← time plan for this week's papers (from reading-guide-template.md)
+├── slides/                   ← discussion deck (skill: .claude/skills/discussion-slides)
 ├── moderation.md             ← only in weeks the user moderates (from moderation-template.md)
 ├── audio/                    ← optional MP3s + tts-plan.md (from tts-plan-template.md)
 ├── notes/
@@ -61,6 +62,9 @@ lowercase, e.g. `heumueller-et-al-2020.md`.
 10. **If the user moderates:** write `moderation.md` from
    `moderation-template.md` (question sequence, quality test for questions,
    outside-the-box questions, background facts).
+11. **Slides (if asked):** use the `discussion-slides` skill
+   (`.claude/skills/discussion-slides/SKILL.md`): fixed structure, plain section
+   headers, house style.
 
 ## Focus areas the user cares about
 
