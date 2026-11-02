@@ -4,6 +4,8 @@ How to turn lecture papers into MP3s you can listen to, to lighten the reading l
 Copy this file to `Vorl_N/audio/tts-plan.md`, fill in the per-week section and
 generate the audio from it.
 
+**Hands-on steps (setup, commands, where the state is): `tts-runbook.md`.**
+
 ## Requirements
 
 - **Language/accent:** British English for English papers; German voice for
@@ -27,7 +29,7 @@ generate the audio from it.
 | British English voice | `en_GB-cori-high` (default), alternative `en_GB-alba-medium` | Download: `python3 -m piper.download_voices <voice>` |
 | German voice | `de_DE-thorsten-high` | For future German material |
 | Conversion | `ffmpeg` (WAV → MP3, ~64 kbit/s mono is enough for speech) | Also joins chunks and adds short pauses |
-| Speed | Per-voice calibration (`templates/tools/calibrate_voices.py` → `length_scale` column in `voices.csv`) evens out voices; `--speed` sets the overall pace in any step (e.g. 1.08) | Players can also change speed; the rating sheet has a 0.05-step slider |
+| Speed | Per-voice calibration (`templates/tools/calibrate_voices.py` → `length_scale` column in `voices.csv`) evens out voices; `--speed` sets the overall pace in any step (e.g. 1.08). 1.0 is the user's preferred pace, which is 0.9× Piper's normal rate (`BASE_PACE` in the generator) | Players can also change speed; the rating sheet has a 0.05-step slider |
 
 ## Steps
 
@@ -89,7 +91,12 @@ Spread one paper over many voices to compare them on real content:
 - Rate on the rating sheet page (audio player, highlighted current voice,
   bad/medium/good per voice, keys 1/2/3, export as Markdown or CSV).
   First used in `Vorl_1/audio/voice-test/`.
-- `--voices voices.csv` switches the generator to this mode. Snippets are balanced
+- `--voices voices.csv` switches the generator to this mode.
+- **Voice order is mixed** (default): voices from less common models are spread
+  evenly, and neighbouring voices differ in sex and accent, so similar voices
+  don't blend together (`--no-mix` keeps the CSV order).
+- **3-second pause at every voice switch** (`--switch-gap`, default 3.0), so each
+  new voice is clearly separate. The timestamps start after the pause. Snippets are balanced
   by expected speaking time (greedy, whole sentences, share recomputed per voice),
   so no voice gets a tiny snippet.
 - Even out speaking rates in two steps: `calibrate_voices.py` (fixed passage) before
